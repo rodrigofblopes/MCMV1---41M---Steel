@@ -1,0 +1,18 @@
+# Build e dependências (Vercel instala e gera no servidor)
+node_modules
+dist
+dist-ssr
+.pnpm-store
+.cache
+
+# Repositório local
+.git
+*.log
+.env*.local
+
+# CAD / documentação pesada na raiz (mesmas regras que .gitignore — não entram no upload CLI)
+*.rvt
+*.dwg
+/*.doc
+/*.xls
+/*.xlsx

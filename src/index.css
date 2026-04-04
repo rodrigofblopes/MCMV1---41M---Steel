@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+/* Mobile: menos atraso em toques, sem flash cinza no iOS */
+@media (max-width: 767px) {
+  button,
+  a,
+  [role='button'],
+  input[type='submit'] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}
+
+.leaflet-container {
+  font-family: inherit;
+}
+
+.avalia-marcador-preco,
+.avalia-marcador-sujeito,
+.avalia-marcador-terreno-sujeito,
+.avalia-marcador-amostra-num,
+.avalia-marcador-terreno-amostra,
+.avalia-marcador-servico-amostra,
+.avalia-marcador-servico {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Card de amostra no mapa (Leaflet popup) */
+.avalia-popup-amostra .leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 0.75rem;
+  box-shadow:
+    0 10px 40px rgba(15, 23, 42, 0.12),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgb(226 232 240);
+  overflow: hidden;
+}
+
+.avalia-popup-amostra .leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+  min-width: 280px;
+}
+
+.avalia-popup-amostra .leaflet-popup-content p {
+  margin: 0;
+}
+
+.avalia-popup-amostra .leaflet-popup-tip {
+  box-shadow: none;
+}
+
+.avalia-amostra-popup-inner {
+  padding: 1rem;
+}
+
+.avalia-popup-terreno .leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 0.75rem;
+  box-shadow:
+    0 10px 40px rgba(15, 23, 42, 0.12),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgb(226 232 240);
+}
+
+.avalia-popup-terreno .leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+}
+
+.avalia-popup-terreno .leaflet-popup-content p {
+  margin: 0;
+}
+
+.avalia-terreno-popup-inner {
+  padding: 1rem;
+}
