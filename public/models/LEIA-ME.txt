@@ -1,10 +1,10 @@
 Modelo 3D — aba Projeto > 3D
 
-  O ficheiro usado pela app está na raiz de public/ (não nesta pasta):
+  O ficheiro usado pela app está nesta pasta:
 
-  public/41M.glb
+  public/models/41M.glb
 
-  Ou seja, ao correr o site, o URL é /41M.glb (com BASE_URL do Vite à frente, se existir).
+  O URL público fica /models/41M.glb (ou ./models/41M.glb com base relativo no build).
 
 Para mudar o nome ou caminho, edite:
-  src/pages/Apresentacao3D.jsx  (const MODELO_GLB e função urlModelo3D)
+  src/pages/Apresentacao3D.jsx  (const MODELO_GLB)

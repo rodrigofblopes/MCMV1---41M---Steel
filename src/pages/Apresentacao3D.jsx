@@ -11,8 +11,8 @@ function joinBaseUrl(path) {
   return `${root}/${p}`
 }
 
-/** GLB na raiz de public/ → URL /41M.glb (respeita BASE_URL do Vite). */
-const MODELO_GLB = '41M.glb'
+/** GLB em public/models/ (copiado para dist/models/; não usar só o nome na raiz). */
+const MODELO_GLB = 'models/41M.glb'
 
 function urlModelo3D() {
   return joinBaseUrl(MODELO_GLB)
