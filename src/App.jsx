@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import AppShell from './components/layout/AppShell.jsx'
 import { AmostrasProvider } from './contexts/AmostrasContext.jsx'
 import { EmpreendimentoProvider } from './contexts/EmpreendimentoContext.jsx'
@@ -35,7 +35,7 @@ function CarregandoApresentacao() {
 
 export default function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <ViabilidadeCalcProvider>
       <AmostrasProvider>
         <EmpreendimentoProvider>
@@ -73,6 +73,6 @@ export default function App() {
         </EmpreendimentoProvider>
       </AmostrasProvider>
       </ViabilidadeCalcProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }

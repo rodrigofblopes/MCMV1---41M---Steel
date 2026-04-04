@@ -2,10 +2,11 @@ import TabelasEquivalenciaNBR12721 from '../components/projeto/TabelasEquivalenc
 import { AREA_CONSTRUIDA_REF_TEXTO } from '../constants/areaProjeto.js'
 
 function publicAsset(path) {
+  const rel = path.replace(/^\/+/, '')
   const base = import.meta.env.BASE_URL || '/'
-  const root = base.endsWith('/') ? base : `${base}/`
-  const rel = path.startsWith('/') ? path.slice(1) : path
-  return `${root}${rel}`
+  if (base === '/' || base === '') return `/${rel}`
+  const root = base.endsWith('/') ? base.slice(0, -1) : base
+  return `${root}/${rel}`
 }
 
 export default function ProjetoPlanta() {

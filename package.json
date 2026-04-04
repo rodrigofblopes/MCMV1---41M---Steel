@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:gh-pages": "vite build --base=/MCMV1---41M---Steel/ && node scripts/gh-pages-404.mjs",
+    "build": "vite build && node scripts/gh-pages-404.mjs",
+    "build:gh-pages": "npm run build",
     "preview": "vite preview"
   },
   "dependencies": {

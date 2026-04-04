@@ -4,10 +4,11 @@ import Cena3DEmpreendimento from '../components/apresentacao/Cena3DEmpreendiment
 import { useEmpreendimento } from '../contexts/EmpreendimentoContext.jsx'
 
 function joinBaseUrl(path) {
+  const p = path.replace(/^\/+/, '')
   const base = import.meta.env.BASE_URL || '/'
-  const a = base.endsWith('/') ? base.slice(0, -1) : base
-  const b = path.startsWith('/') ? path : `/${path}`
-  return `${a}${b}`
+  if (base === '/' || base === '') return `/${p}`
+  const root = base.endsWith('/') ? base.slice(0, -1) : base
+  return `${root}/${p}`
 }
 
 /** GLB na raiz de public/ → URL /41M.glb (respeita BASE_URL do Vite). */

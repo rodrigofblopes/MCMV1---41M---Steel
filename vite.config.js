@@ -2,7 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig({
+/** Em dev: `/` (igual ao servidor local). Em build: `./` para o mesmo pacote servir na raiz (Vercel) ou em subpasta (GitHub Pages). */
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : './',
   plugins: [react(), tailwindcss()],
   assetsInclude: ['**/*.glb', '**/*.gltf'],
   build: {
@@ -19,5 +21,5 @@ export default defineConfig({
       }
     }
   },
-  publicDir: 'public'
-})
+  publicDir: 'public',
+}))
