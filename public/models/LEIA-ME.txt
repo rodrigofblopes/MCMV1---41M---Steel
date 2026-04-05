@@ -1,10 +1,15 @@
 Modelo 3D — aba Projeto > 3D
 
-  O ficheiro usado pela app está nesta pasta:
+  O ficheiro usado pela app é:
 
   public/models/41M.glb
 
-  O URL público fica /models/41M.glb (ou ./models/41M.glb com base relativo no build).
+  Se exportar o SketchUp/Rhino para 41M.glb na RAIZ do projeto, copie para cá com:
 
-Para mudar o nome ou caminho, edite:
+    npm run sync:model
+
+  Cada `npm run build` gera um novo parâmetro ?v=... no URL do GLB para o browser não manter
+  uma versão antiga em cache (Vercel/GitHub).
+
+Para mudar o nome, edite:
   src/pages/Apresentacao3D.jsx  (const MODELO_GLB)

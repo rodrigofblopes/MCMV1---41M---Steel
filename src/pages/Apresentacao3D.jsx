@@ -11,18 +11,19 @@ function joinBaseUrl(path) {
   return `${root}/${p}`
 }
 
-/** GLB em public/models/ (copiado para dist/models/; não usar só o nome na raiz). */
+/** GLB em public/models/ → URL /models/41M.glb (respeita BASE_URL do Vite). */
 const MODELO_GLB = 'models/41M.glb'
-
-function urlModelo3D() {
-  return joinBaseUrl(MODELO_GLB)
-}
 
 export default function Apresentacao3D() {
   const containerRef = useRef(null)
   const { dados } = useEmpreendimento()
   const nomeProjeto = dados.nomeProjeto?.trim() || dados.nome?.trim() || 'Empreendimento'
-  const modelUrl = useMemo(() => urlModelo3D(), [])
+  /** Em produção, ?v=timestamp muda a cada build (vite.config) para não ficar o GLB antigo em cache. */
+  const modelUrl = useMemo(() => {
+    const baseUrl = joinBaseUrl(MODELO_GLB)
+    const bust = import.meta.env.VITE_MODEL_ASSET_BUST
+    return bust ? `${baseUrl}?v=${bust}` : baseUrl
+  }, [])
 
   useEffect(() => {
     useGLTF.preload(modelUrl)
