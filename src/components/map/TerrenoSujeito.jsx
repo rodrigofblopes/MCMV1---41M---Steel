@@ -23,7 +23,6 @@ export default function TerrenoSujeito({
   camadaAtiva,
   exibirRaios,
   mostrarNomes,
-  mostrarNomesCompletos,
 }) {
   if (!camadaAtiva || !sujeito) return null
 
@@ -85,15 +84,9 @@ export default function TerrenoSujeito({
             </div>
           </div>
         </Popup>
-        {exibirRaios || mostrarNomes ? (
+        {mostrarNomes ? (
           <Tooltip direction="top" offset={[0, -10]} opacity={0.95} permanent>
-            {mostrarNomesCompletos && mostrarNomes
-              ? nomeProjeto
-              : exibirRaios
-                ? nomeProjeto.length > 34
-                  ? `${nomeProjeto.slice(0, 34)}…`
-                  : nomeProjeto
-                : 'Terreno sujeito'}
+            ★
           </Tooltip>
         ) : null}
       </Marker>

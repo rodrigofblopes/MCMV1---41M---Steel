@@ -104,9 +104,9 @@ export default function AmostrasTable({
 
       <div className="overflow-x-auto rounded-b-2xl">
         <table className="w-full min-w-[640px] text-left text-sm text-slate-700">
-          <thead className="border-b border-slate-200 bg-slate-100/90 text-xs font-bold uppercase tracking-wide text-slate-600">
+          <thead className="border-b border-slate-300 bg-[#e2e8f0] text-xs font-bold uppercase tracking-wide text-[#1e3a5f]">
             <tr>
-              <th className="px-4 py-3 font-semibold">Nome</th>
+              <th className="px-4 py-3 font-semibold">Amostra</th>
               <th className="px-4 py-3 text-right font-semibold">Área</th>
               <th className="px-4 py-3 text-center font-semibold">Banheiros</th>
               <th className="px-4 py-3 text-center font-semibold">Quartos</th>
@@ -144,7 +144,7 @@ export default function AmostrasTable({
                       opacaFora ? 'opacity-50' : '',
                     ].join(' ')}
                   >
-                    <td className="max-w-[min(280px,40vw)] truncate px-4 py-3 font-medium text-[#1e293b]" title={a.nome}>
+                    <td className="max-w-md px-4 py-3 font-medium leading-snug text-[#1e293b] whitespace-normal">
                       {a.nome}
                     </td>
                     <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">

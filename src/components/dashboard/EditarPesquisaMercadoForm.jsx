@@ -2,8 +2,10 @@ export default function EditarPesquisaMercadoForm({
   nomeProjeto,
   fatorCorrecao,
   areaUnidadeM2,
+  areaTerrenoM2,
   onFatorChange,
   onAreaUnidadeChange,
+  onAreaTerrenoChange,
   onVoltar,
   onCancelar,
   onSalvar,
@@ -70,9 +72,33 @@ export default function EditarPesquisaMercadoForm({
                 </span>
               </div>
               <p className="mt-1 text-xs text-slate-500">
-                Valor da unidade = média R$/m² das amostras × esta área.
+                Valor da unidade = média R$/m² das amostras de unidade × esta área.
               </p>
             </div>
+          </div>
+
+          <div className="border-t border-slate-100 px-5 py-6 sm:px-8">
+            <label htmlFor="pm-area-terreno" className="mb-1.5 block text-sm font-semibold text-[#1e293b]">
+              Área do lote (terreno da unidade)
+            </label>
+            <div className="flex max-w-md rounded-xl border border-slate-200 bg-white shadow-sm focus-within:ring-2 focus-within:ring-slate-200">
+              <input
+                id="pm-area-terreno"
+                type="text"
+                inputMode="decimal"
+                className="min-w-0 flex-1 rounded-l-xl border-0 bg-transparent px-3 py-2.5 text-sm outline-none"
+                value={areaTerrenoM2}
+                onChange={(e) => onAreaTerrenoChange(e.target.value)}
+                placeholder="ex.: 300 (12×25 m)"
+                autoComplete="off"
+              />
+              <span className="flex items-center border-l border-slate-200 bg-slate-50 px-3 text-sm text-slate-600">
+                m²
+              </span>
+            </div>
+            <p className="mt-1 text-xs text-slate-500">
+              Valor do lote = média R$/m² das amostras de terreno × esta área (mesmo fator de correção % acima).
+            </p>
           </div>
 
           <div className="flex flex-row flex-wrap items-center justify-between gap-3 border-t border-slate-100 px-5 py-4 sm:px-8">

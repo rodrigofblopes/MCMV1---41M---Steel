@@ -326,7 +326,7 @@ export default function CalculadoraViabilidade() {
                 </div>
                 {precoMercadoSincronizaComPesquisa ? (
                   <Ajuda>
-                    Valor alinhado ao painel <strong>Valor da unidade com correção</strong> na aba Pesquisa (média
+                    Valor alinhado ao painel <strong>Valor da unidade</strong> na aba Pesquisa (média
                     R$/m² × área da unidade × fator de correção). Atualiza quando a pesquisa muda; pode editar à mão
                     para cenários alternativos.
                   </Ajuda>

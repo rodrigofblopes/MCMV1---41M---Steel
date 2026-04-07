@@ -24,7 +24,7 @@ export default function ResumoEquivalenciaPlantaCustos({ cubPorM2 }) {
         </p>
       ) : (
         <p className="mt-2 text-xs text-slate-500">
-          Após <strong>Aplicar às etapas</strong> na referência CUB, o CUB/m² do padrão entra aqui.
+          Quando o CUB/m² da referência estiver disponível, o indicativo aparece aqui automaticamente.
         </p>
       )}
       <p className="mt-2">
@@ -32,7 +32,7 @@ export default function ResumoEquivalenciaPlantaCustos({ cubPorM2 }) {
           to={projetoPlanta}
           className="text-xs font-semibold text-violet-700 underline decoration-violet-300 underline-offset-2 hover:text-violet-900"
         >
-          Ver ambientes e coeficientes na Planta baixa →
+          Ver planta baixa →
         </Link>
       </p>
     </div>

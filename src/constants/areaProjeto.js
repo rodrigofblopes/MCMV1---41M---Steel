@@ -7,6 +7,10 @@ export const AREA_CONSTRUIDA_REF_TEXTO = '41,16'
 /** Valor numérico em m² (memorial / planta) — base para CUB × m² na aba Custos. */
 export const AREA_CONSTRUIDA_REF_M2 = Number.parseFloat(AREA_CONSTRUIDA_REF_TEXTO.replace(',', '.'))
 
+/** Lote do memorial em estudo: 12 × 25 m (pesquisa de mercado / valor do lote). */
+export const AREA_LOTE_REF_M2 = 300
+export const AREA_LOTE_REF_TEXTO = '300'
+
 /** Nome curto do produto com a área da planta (cabeçalhos, placeholders). */
 export const ROTULO_PROJETO_COM_AREA = `MCMV1 — ${AREA_CONSTRUIDA_REF_TEXTO} m²`
 

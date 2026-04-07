@@ -258,7 +258,7 @@ export default function CustosProjetoPage() {
               <span className="text-xl font-semibold text-slate-600 sm:text-2xl">m²</span>
             </p>
             <p className="mt-2 text-xs text-slate-500">
-              Memorial / planta — mesma base da referência CUB acima. ΣSe por ambiente (NBR 12721) na Planta baixa.
+              Memorial / planta — mesma base da referência CUB acima.
             </p>
           </div>
 

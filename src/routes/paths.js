@@ -7,7 +7,7 @@ export const apresentacaoInvestidor = '/apresentacao-investidor'
 export const empreendimento = '/empreendimento'
 export const custos = '/custos'
 export const custosNovo = '/custos/novo'
-/** Aba CUB — referência e etapas (ΣSe × padrão). */
+/** Aba CUB — referência e etapas (área memorial × padrão). */
 export const custosCub = '/custos/cub'
 /** Aba SINAPI — a elaborar. */
 export const custosSinapi = '/custos/sinapi'

@@ -1,4 +1,3 @@
-import TabelasEquivalenciaNBR12721 from '../components/projeto/TabelasEquivalenciaNBR12721.jsx'
 import { AREA_CONSTRUIDA_REF_TEXTO } from '../constants/areaProjeto.js'
 
 function publicAsset(path) {
@@ -33,8 +32,6 @@ export default function ProjetoPlanta() {
             Planta técnica — dimensões e cotas conforme projeto arquitetônico.
           </figcaption>
         </figure>
-
-        <TabelasEquivalenciaNBR12721 />
       </div>
     </main>
   )

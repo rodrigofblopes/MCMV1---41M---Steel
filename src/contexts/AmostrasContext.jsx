@@ -1,18 +1,48 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { amostrasExemplo } from '../data/amostrasExemplo.js'
 
-/** v9: 17 comparáveis com lat/lng (planilha Bairro Novo / Sevilha), como antes da remoção de coordenadas. */
-const STORAGE_KEY = 'mcmv1-43m2-amostras-v9'
+/** v10: textos Bairro Novo/Sevilha + cluster no mapa; migração v9 atualiza nome e lat/lng dos ids 1–17. */
+const STORAGE_KEY = 'mcmv1-43m2-amostras-v10'
+const LEGACY_STORAGE_KEY = 'mcmv1-43m2-amostras-v9'
 
 const Ctx = createContext(null)
 
+function listaValida(parsed) {
+  return (
+    Array.isArray(parsed) &&
+    parsed.every((a) => a && a.id != null && a.preco != null && a.area != null)
+  )
+}
+
+function aplicarNomeECoordenadasExemplo(amostras) {
+  const ref = new Map(amostrasExemplo.map((a) => [Number(a.id), a]))
+  return amostras.map((a) => {
+    const id = Number(a.id)
+    const r = ref.get(id)
+    if (!r || r.tipo !== a.tipo || id < 1 || id > 17) return a
+    return { ...a, nome: r.nome, lat: r.lat, lng: r.lng }
+  })
+}
+
 function carregarInicial() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) {
-      const parsed = JSON.parse(raw)
-      if (Array.isArray(parsed) && parsed.every((a) => a && a.id != null && a.preco != null && a.area != null)) {
-        return parsed
+    const raw10 = localStorage.getItem(STORAGE_KEY)
+    if (raw10) {
+      const parsed = JSON.parse(raw10)
+      if (listaValida(parsed)) return parsed
+    }
+    const raw9 = localStorage.getItem(LEGACY_STORAGE_KEY)
+    if (raw9) {
+      const parsed = JSON.parse(raw9)
+      if (listaValida(parsed)) {
+        const migrado = aplicarNomeECoordenadasExemplo(parsed)
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(migrado))
+          localStorage.removeItem(LEGACY_STORAGE_KEY)
+        } catch {
+          /* quota / privado */
+        }
+        return migrado
       }
     }
   } catch {

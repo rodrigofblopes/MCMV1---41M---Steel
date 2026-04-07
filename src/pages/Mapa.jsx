@@ -23,10 +23,9 @@ export default function Mapa() {
   const [camadaServicos, setCamadaServicos] = useState(false)
   const [alcanceTerrenos, setAlcanceTerrenos] = useState(true)
   const [mostrarNomes, setMostrarNomes] = useState(false)
-  const [mostrarNomesCompletos, setMostrarNomesCompletos] = useState(false)
   const [visivelPorId, setVisivelPorId] = useState({})
 
-  const stats = useMemo(() => calcularEstatisticas(amostras), [amostras])
+  const statsUnidadesPreco = useMemo(() => calcularEstatisticas(amostras, 'unidade'), [amostras])
 
   const centroMapa = useMemo(() => {
     const lat = Number(sujeito?.lat)
@@ -53,10 +52,6 @@ export default function Mapa() {
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3">
         <div>
           <h1 className="text-lg font-semibold tracking-tight">Mapa da proposta</h1>
-          <p className="text-xs text-slate-500">
-            Portfólio de amostras de mercado ao redor do empreendimento — o investidor pode incluir ou excluir
-            comparáveis.
-          </p>
         </div>
       </header>
 
@@ -76,8 +71,6 @@ export default function Mapa() {
           onAlcanceTerrenos={setAlcanceTerrenos}
           mostrarNomes={mostrarNomes}
           onMostrarNomes={setMostrarNomes}
-          mostrarNomesCompletos={mostrarNomesCompletos}
-          onMostrarNomesCompletos={setMostrarNomesCompletos}
           onRemoverAmostra={removeAmostra}
           />
 
@@ -89,14 +82,13 @@ export default function Mapa() {
             zoomInicial={ZOOM_INICIAL}
             sujeito={sujeito}
             amostras={amostras}
-            precoMedio={stats.precoMedio}
+            precoMedio={statsUnidadesPreco.precoMedio}
             camadaTerreno={camadaTerreno}
             camadaPrecos={camadaPrecos}
             camadaServicos={camadaServicos}
             visivelPorId={visivelPorId}
             alcanceTerrenos={alcanceTerrenos}
             mostrarNomes={mostrarNomes}
-            mostrarNomesCompletos={mostrarNomesCompletos}
             />
           </div>
         </div>

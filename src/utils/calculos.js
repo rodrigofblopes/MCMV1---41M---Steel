@@ -1,3 +1,14 @@
+import { filtrarAmostrasTerrenoParaPainel } from '../constants/amostrasTerrenoMercado.js'
+
+/** Média do preço total das amostras de terreno de mercado (ids 14–17), para legenda / faixas no mapa. */
+export function precoMedioTotalTerrenoMercado(amostras) {
+  const precos = filtrarAmostrasTerrenoParaPainel(amostras)
+    .map((a) => Number(a.preco))
+    .filter((p) => Number.isFinite(p))
+  if (!precos.length) return null
+  return precos.reduce((s, p) => s + p, 0) / precos.length
+}
+
 /** Distância em metros entre dois pontos (Haversine). */
 export function calcularDistancia(lat1, lng1, lat2, lng2) {
   const R = 6371000
@@ -45,8 +56,14 @@ export function faixaPrecoRelativaMedia(preco, precoMedio) {
   return 'medio'
 }
 
-export function calcularEstatisticas(amostras) {
-  const lista = (amostras || []).filter((a) => a.tipo !== 'servico')
+/**
+ * @param {'unidade' | 'terreno' | undefined} [filtroTipo] — só essas amostras; omitido = todas exceto serviço (mapa / legado).
+ */
+export function calcularEstatisticas(amostras, filtroTipo) {
+  let lista = (amostras || []).filter((a) => a.tipo !== 'servico')
+  if (filtroTipo === 'unidade' || filtroTipo === 'terreno') {
+    lista = lista.filter((a) => a.tipo === filtroTipo)
+  }
   if (!lista.length) {
     return {
       precoMax: 0,
@@ -81,15 +98,57 @@ export function calcularEstatisticas(amostras) {
   }
 }
 
+/** Totais para o cabeçalho da Pesquisa (ex.: 31 amostras · 22 unidades · 9 terrenos). */
+export function contagemAmostrasMercado(amostras) {
+  const lista = amostras || []
+  const unidades = lista.filter((a) => a.tipo === 'unidade').length
+  const terrenos = filtrarAmostrasTerrenoParaPainel(lista).length
+  const total = lista.filter((a) => a.tipo !== 'servico').length
+  return { total, unidades, terrenos }
+}
+
 /**
- * Mesma lógica do painel Pesquisa: média R$/m² das amostras × área da unidade × (1 + correção %).
- * @param {number} areaUnidadeM2 Área em m²
- * @param {number} pctCorrecaoPercent Percentual (ex.: 1 → +1%)
+ * Mesma lógica do painel Pesquisa: média R$/m² das amostras de **unidade** × área × (1 + correção %).
+ * Se não houver amostras de unidade, usa todas as amostras não-serviço (compatibilidade).
  */
 export function valorUnidadeComCorrecaoNumerico(amostras, areaUnidadeM2, pctCorrecaoPercent) {
-  const stats = calcularEstatisticas(amostras)
+  let stats = calcularEstatisticas(amostras, 'unidade')
+  if (stats.precoMedioM2 <= 0) stats = calcularEstatisticas(amostras)
   if (areaUnidadeM2 <= 0 || stats.precoMedioM2 <= 0) return 0
   const bruto = Math.round(stats.precoMedioM2 * areaUnidadeM2 * 100) / 100
   const pct = Number.isFinite(pctCorrecaoPercent) ? pctCorrecaoPercent : 0
   return Math.round(bruto * (1 + pct / 100) * 100) / 100
+}
+
+/**
+ * Cada terreno do painel (ids 14–17 se existirem; senão todo `tipo: 'terreno'`): (preço÷área)×área do lote ref.
+ */
+export function projecaoPrecosLoteTerreno(amostras, areaLoteM2, pctCorrecaoPercent) {
+  const lista = filtrarAmostrasTerrenoParaPainel(amostras)
+  const projetados = []
+  for (const a of lista) {
+    const ar = Number(a.area)
+    const pr = Number(a.preco)
+    if (ar > 0 && Number.isFinite(pr)) projetados.push((pr / ar) * areaLoteM2)
+  }
+  if (!projetados.length || areaLoteM2 <= 0) {
+    return { precoMax: null, precoMedio: null, precoMin: null }
+  }
+  const pct = Number.isFinite(pctCorrecaoPercent) ? pctCorrecaoPercent : 0
+  const k = 1 + pct / 100
+  const aplicar = (v) => Math.round(v * k * 100) / 100
+  return {
+    precoMax: aplicar(Math.max(...projetados)),
+    precoMedio: aplicar(projetados.reduce((s, x) => s + x, 0) / projetados.length),
+    precoMin: aplicar(Math.min(...projetados)),
+  }
+}
+
+/**
+ * Média R$/m² das amostras de **terreno** × área do lote × (1 + correção %) — igual a {@link projecaoPrecosLoteTerreno}.precoMedio.
+ * @returns {number | null} null se não houver base de cálculo.
+ */
+export function valorLoteComCorrecaoNumerico(amostras, areaTerrenoM2, pctCorrecaoPercent) {
+  const p = projecaoPrecosLoteTerreno(amostras, areaTerrenoM2, pctCorrecaoPercent)
+  return p.precoMedio
 }

@@ -4,7 +4,11 @@ import { useEmpreendimento } from '../../contexts/EmpreendimentoContext.jsx'
 import { AREA_CONSTRUIDA_REF_TEXTO, ROTULO_PROJETO_COM_AREA } from '../../constants/areaProjeto.js'
 import { modoInvestidor } from '../../config/modoInvestidor.js'
 import { usePesquisaMercadoConfig } from '../../hooks/usePesquisaMercadoConfig.js'
-import { calcularEstatisticas } from '../../utils/calculos.js'
+import {
+  calcularEstatisticas,
+  contagemAmostrasMercado,
+  valorUnidadeComCorrecaoNumerico,
+} from '../../utils/calculos.js'
 import { formatarArea, formatarMoeda } from '../../utils/formatadores.js'
 import { parseMoedaBR, parsePercentBR } from '../../utils/parseValoresBR.js'
 import EditarPesquisaMercadoForm from './EditarPesquisaMercadoForm.jsx'
@@ -37,6 +41,11 @@ function GearIcon() {
   )
 }
 
+function fmtAreaMetodo(m2) {
+  if (!Number.isFinite(m2) || m2 <= 0) return '—'
+  return `${m2.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} m²`
+}
+
 function IconePredio() {
   return (
     <svg
@@ -56,6 +65,17 @@ function IconePredio() {
   )
 }
 
+const gearBtnHero = (onClick) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className="rounded-md p-1 text-white/90 transition-colors hover:bg-white/15"
+    aria-label="Definir áreas e fator de correção"
+  >
+    <GearIcon />
+  </button>
+)
+
 export default function DashboardPage() {
   const { amostras, removeAmostra } = useAmostras()
   const { sujeito, dados } = useEmpreendimento()
@@ -63,16 +83,16 @@ export default function DashboardPage() {
   const [edicaoPesquisaAberta, setEdicaoPesquisaAberta] = useState(false)
   const [draftFator, setDraftFator] = useState('')
   const [draftArea, setDraftArea] = useState('')
-  const [modo, setModo] = useState('venda')
+  const [draftAreaTerreno, setDraftAreaTerreno] = useState('')
   const [camadaTerreno, setCamadaTerreno] = useState(true)
   const [camadaPrecos, setCamadaPrecos] = useState(true)
   const [camadaServicos, setCamadaServicos] = useState(false)
   const [alcanceTerrenos, setAlcanceTerrenos] = useState(true)
   const [mostrarNomes, setMostrarNomes] = useState(true)
-  const [mostrarNomesCompletos, setMostrarNomesCompletos] = useState(false)
   const [visivelPorId, setVisivelPorId] = useState({})
 
-  const stats = useMemo(() => calcularEstatisticas(amostras), [amostras])
+  const statsUnidades = useMemo(() => calcularEstatisticas(amostras, 'unidade'), [amostras])
+  const contagem = useMemo(() => contagemAmostrasMercado(amostras), [amostras])
 
   const centroMapa = useMemo(() => {
     const lat = Number(sujeito?.lat)
@@ -82,25 +102,26 @@ export default function DashboardPage() {
   }, [sujeito?.lat, sujeito?.lng])
 
   const areaUnidadeM2 = parseMoedaBR(config.areaUnidadeM2)
-  const valorUnidadeBruto =
-    areaUnidadeM2 > 0 && stats.precoMedioM2 > 0 ? stats.precoMedioM2 * areaUnidadeM2 : 0
-  const valorUnidadeDemo = Math.round(valorUnidadeBruto * 100) / 100
   const pctCorrecao = parsePercentBR(config.fatorCorrecaoPercent)
-  const valorComCorrecaoDemo =
-    Math.round(valorUnidadeDemo * (1 + pctCorrecao / 100) * 100) / 100
-
+  const valorUnidadeBase = valorUnidadeComCorrecaoNumerico(amostras, areaUnidadeM2, 0)
+  const valorUnidadeComCorrecao = valorUnidadeComCorrecaoNumerico(amostras, areaUnidadeM2, pctCorrecao)
   const nomePainel = dados.nomeProjeto?.trim() || NOME_PROJETO_DEMO
 
   const abrirEdicaoPesquisa = useCallback(() => {
     setDraftFator(config.fatorCorrecaoPercent)
     setDraftArea(config.areaUnidadeM2.trim() || AREA_CONSTRUIDA_REF_TEXTO)
+    setDraftAreaTerreno(String(config.areaTerrenoM2 ?? '').trim())
     setEdicaoPesquisaAberta(true)
-  }, [config.areaUnidadeM2, config.fatorCorrecaoPercent])
+  }, [config.areaTerrenoM2, config.areaUnidadeM2, config.fatorCorrecaoPercent])
 
   const salvarEdicaoPesquisa = useCallback(() => {
-    setConfig({ fatorCorrecaoPercent: draftFator, areaUnidadeM2: draftArea })
+    setConfig({
+      fatorCorrecaoPercent: draftFator,
+      areaUnidadeM2: draftArea,
+      areaTerrenoM2: draftAreaTerreno,
+    })
     setEdicaoPesquisaAberta(false)
-  }, [draftArea, draftFator, setConfig])
+  }, [draftArea, draftAreaTerreno, draftFator, setConfig])
 
   const cancelarEdicaoPesquisa = useCallback(() => {
     setEdicaoPesquisaAberta(false)
@@ -112,8 +133,10 @@ export default function DashboardPage() {
         nomeProjeto={nomePainel}
         fatorCorrecao={draftFator}
         areaUnidadeM2={draftArea}
+        areaTerrenoM2={draftAreaTerreno}
         onFatorChange={setDraftFator}
         onAreaUnidadeChange={setDraftArea}
+        onAreaTerrenoChange={setDraftAreaTerreno}
         onVoltar={cancelarEdicaoPesquisa}
         onCancelar={cancelarEdicaoPesquisa}
         onSalvar={salvarEdicaoPesquisa}
@@ -131,107 +154,67 @@ export default function DashboardPage() {
   return (
     <div className="min-h-0 flex-1 px-3 py-5 text-[#1e293b] sm:px-5 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-lg font-semibold tracking-tight text-[#1e293b] sm:text-xl">{nomePainel}</h1>
-            <p className="mt-0.5 text-xs text-slate-500 sm:text-sm">
-              {amostras.length} amostras ·{' '}
-              <span className="font-medium text-slate-700">{modo === 'venda' ? 'Venda' : 'Locação'}</span>
+        <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <h1 className="text-2xl font-bold tracking-tight text-[#1e293b] sm:text-3xl">{nomePainel}</h1>
+            <p className="mt-1 text-xs text-slate-500 sm:text-sm">
+              {contagem.total} amostras
+              <span className="mx-2 text-slate-300">·</span>
+              <span className="font-medium text-slate-600">Venda</span>
               <span className="mx-2 text-slate-300">·</span>
               <span className="font-medium text-[#00B37E]">Portfólio e mapa disponíveis abaixo</span>
             </p>
           </div>
-          <div
-            className="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm"
-            role="group"
-            aria-label="Tipo de negócio"
+          <button
+            type="button"
+            className="shrink-0 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-[#00B37E] shadow-sm transition-colors hover:bg-slate-50"
+            onClick={() =>
+              document.getElementById('portfolio-amostras')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
           >
-            <button
-              type="button"
-              onClick={() => setModo('venda')}
-              className={[
-                'rounded-full px-5 py-2 text-sm font-medium transition-colors',
-                modo === 'venda' ? 'bg-[#00B37E] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50',
-              ].join(' ')}
-            >
-              Venda
-            </button>
-            <button
-              type="button"
-              onClick={() => setModo('locacao')}
-              className={[
-                'rounded-full px-5 py-2 text-sm font-medium transition-colors',
-                modo === 'locacao' ? 'bg-[#00B37E] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50',
-              ].join(' ')}
-            >
-              Locação
-            </button>
-          </div>
+            Pesquisa
+          </button>
         </header>
 
         <section className="mb-5 grid gap-4 md:grid-cols-2">
           <StatsCard
             variant="hero"
             titulo="Valor da unidade"
-            valor={formatarMoeda(valorUnidadeDemo)}
+            valor={formatarMoeda(valorUnidadeBase)}
             grande
-            icone={
-              modoInvestidor ? null : (
-                <button
-                  type="button"
-                  onClick={abrirEdicaoPesquisa}
-                  className="rounded-md p-1 text-white/90 transition-colors hover:bg-white/15"
-                  aria-label="Definir área da unidade e fator de correção"
-                >
-                  <GearIcon />
-                </button>
-              )
-            }
+            icone={modoInvestidor ? null : gearBtnHero(abrirEdicaoPesquisa)}
           />
           <StatsCard
             variant="hero"
             titulo="Valor da unidade com correção"
-            valor={formatarMoeda(valorComCorrecaoDemo)}
+            valor={formatarMoeda(valorUnidadeComCorrecao)}
             grande
-            icone={
-              modoInvestidor ? null : (
-                <button
-                  type="button"
-                  onClick={abrirEdicaoPesquisa}
-                  className="rounded-md p-1 text-white/90 transition-colors hover:bg-white/15"
-                  aria-label="Definir área da unidade e fator de correção"
-                >
-                  <GearIcon />
-                </button>
-              )
-            }
+            icone={modoInvestidor ? null : gearBtnHero(abrirEdicaoPesquisa)}
           />
         </section>
 
         <section className="mb-5 grid gap-4 sm:grid-cols-3">
-          <StatsCard titulo="Valor máximo" valor={formatarMoeda(stats.precoMax)} />
-          <StatsCard titulo="Valor médio" valor={formatarMoeda(stats.precoMedio)} destaque />
-          <StatsCard titulo="Valor mínimo" valor={formatarMoeda(stats.precoMin)} />
+          <StatsCard titulo="Valor máximo" valor={formatarMoeda(statsUnidades.precoMax)} />
+          <StatsCard titulo="Valor médio" valor={formatarMoeda(statsUnidades.precoMedio)} destaque />
+          <StatsCard titulo="Valor mínimo" valor={formatarMoeda(statsUnidades.precoMin)} />
         </section>
 
-        <section className="mb-8 grid gap-4 sm:grid-cols-3">
-          <StatsCard
-            titulo="Área máxima"
-            valor={formatarArea(stats.areaMax)}
-            iconeEsquerda={<IconePredio />}
-          />
+        <section className="mb-5 grid gap-4 sm:grid-cols-3">
+          <StatsCard titulo="Área máxima" valor={formatarArea(statsUnidades.areaMax)} iconeEsquerda={<IconePredio />} />
           <StatsCard
             titulo="Área média"
-            valor={formatarArea(stats.areaMedia)}
+            valor={formatarArea(statsUnidades.areaMedia)}
             destaque
             iconeEsquerda={<IconePredio />}
           />
-          <StatsCard
-            titulo="Área mínima"
-            valor={formatarArea(stats.areaMin)}
-            iconeEsquerda={<IconePredio />}
-          />
+          <StatsCard titulo="Área mínima" valor={formatarArea(statsUnidades.areaMin)} iconeEsquerda={<IconePredio />} />
         </section>
+
+        <p className="mb-8 max-w-3xl text-[11px] leading-relaxed text-slate-500 sm:text-xs">
+          Unidade: média R$/m² das amostras de <span className="font-medium text-slate-600">unidade</span> ×{' '}
+          {fmtAreaMetodo(areaUnidadeM2)}. &quot;Valor da unidade&quot; sem fator de correção; &quot;com correção&quot;
+          aplica {config.fatorCorrecaoPercent}% (ícone da engrenagem).
+        </p>
 
         <section className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm">
           <div className="flex min-h-[min(52vh,560px)] flex-col md:flex-row md:min-h-[520px]">
@@ -249,8 +232,6 @@ export default function DashboardPage() {
               onAlcanceTerrenos={setAlcanceTerrenos}
               mostrarNomes={mostrarNomes}
               onMostrarNomes={setMostrarNomes}
-              mostrarNomesCompletos={mostrarNomesCompletos}
-              onMostrarNomesCompletos={setMostrarNomesCompletos}
               onRemoverAmostra={modoInvestidor ? undefined : removeAmostra}
               somenteLeitura={modoInvestidor}
             />
@@ -263,14 +244,13 @@ export default function DashboardPage() {
                 zoomInicial={ZOOM_MAPA}
                 sujeito={sujeito}
                 amostras={amostras}
-                precoMedio={stats.precoMedio}
+                precoMedio={statsUnidades.precoMedio}
                 camadaTerreno={camadaTerreno}
                 camadaPrecos={camadaPrecos}
                 camadaServicos={camadaServicos}
                 visivelPorId={visivelPorId}
                 alcanceTerrenos={alcanceTerrenos}
                 mostrarNomes={mostrarNomes}
-                mostrarNomesCompletos={mostrarNomesCompletos}
               />
             </div>
           </div>

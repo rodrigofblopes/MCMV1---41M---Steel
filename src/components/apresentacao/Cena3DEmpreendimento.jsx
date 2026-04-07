@@ -7,6 +7,46 @@ import { Box3, Vector3 } from 'three'
 /** Maior dimensão do conjunto após normalização (espaço da cena). */
 const ALVO_MAX_DIM = 7.5
 
+const VIZ_LAYER = '__vizLayer'
+/** Nós de vista/câmera (IFC/Revit); fora da lista de camadas e sempre ocultos. */
+const VIZ_SKIP_LAYER = '__vizSkipLayer'
+
+function isIgnoredLayerRootName(name) {
+  const n = (name || '').trim()
+  return /^active_view/i.test(n)
+}
+
+/**
+ * Várias raízes com o mesmo prefixo (etapas exportadas como Wall1, Wall2…) → camada “Paredes em Steel Frame”.
+ * TR, CARTOLA (com ou sem LSF) e Laje_Técnica partilham um grupo (rótulo na UI: Cobertura).
+ */
+function mergeGroupKey(name) {
+  const n = (name || '').trim()
+  if (!n) return null
+  if (/^wall([\s_#]|$|\d)/i.test(n)) return 'wall'
+  if (/^tr([\s_#]|$|\d)/i.test(n)) return 'tr-lsf-laje'
+  if (/^cartola($|[\-_\s#]|\d)/i.test(n)) return 'tr-lsf-laje'
+  if (/^laje[_\s-]*técnica/i.test(n) || /^laje[_\s-]*tecnica/i.test(n)) return 'tr-lsf-laje'
+  return null
+}
+
+/** Títulos longos de IFC (ex.: …Elétricoifc, …Hidrosanitárioifc#1) → rótulo na UI. */
+function prettyLayerRootLabel(rawName, index) {
+  const n = (rawName || '').trim()
+  if (/^MCMV/i.test(n) && /el[ée]trico/i.test(n)) return 'Elétrico'
+  if (/^MCMV/i.test(n) && /hidrosanit[áa]rio/i.test(n)) return 'Hidrosanitário'
+  if (/^MCMVFX1.*steel.*ifc#1/i.test(n)) return 'Placas'
+  if (/^MCMV/i.test(n) && /radier/i.test(n)) return 'Radier'
+  if (/^radier($|[\s_#]|\d)/i.test(n)) return 'Radier'
+  if (/^grupo\s*2[23]($|[\s_#]|\d)/i.test(n)) return 'Radier'
+  if (!n) {
+    /* Raízes sem nome no GLB atual → Radier (ex.: "Grupo 22" / "Grupo 23"). */
+    if (index === 21 || index === 22) return 'Radier'
+    return `Grupo ${index + 1}`
+  }
+  return n
+}
+
 function medirMaxDim(obj) {
   obj.updateMatrixWorld(true)
   const box = new Box3().setFromObject(obj)
@@ -15,23 +55,220 @@ function medirMaxDim(obj) {
   return Math.max(s.x, s.y, s.z)
 }
 
-function ParteModelo({ url }) {
+/**
+ * Desce wrappers com um único filho sem nome útil (export SketchUp/Rhino/Blender).
+ */
+function unwrapAnonymousChain(root) {
+  let node = root
+  for (let depth = 0; depth < 10; depth++) {
+    const kids = node.children
+    if (kids.length !== 1) break
+    const only = kids[0]
+    const name = only.name?.trim() ?? ''
+    const generic = !name || /^group#?\d*$/i.test(name) || /^object#?\d*$/i.test(name) || name === 'Scene'
+    if (!generic) break
+    node = only
+  }
+  return node
+}
+
+/**
+ * Filhos que funcionam como “camadas” (arquitetura, instalações, etc.).
+ */
+function discoverLayerRoots(raiz) {
+  const node = unwrapAnonymousChain(raiz)
+  let kids = [...node.children].filter(Boolean)
+
+  if (kids.length === 1 && kids[0].children.length > 1) {
+    const inner = kids[0]
+    const innerKids = [...inner.children]
+    const comNome = innerKids.filter((c) => c.name?.trim())
+    if (comNome.length >= 2) {
+      kids = innerKids
+    }
+  }
+
+  if (kids.length >= 2) {
+    return kids
+  }
+  if (kids.length === 1) {
+    return kids
+  }
+  return [node]
+}
+
+/** Inspeciona subgrupos sob a raiz da etapa Placas (MCMVFX1…Steelifc#1). Só console (dev). */
+function logSubgruposEtapaPlacas(raiz) {
+  const rx = /mcmvfx1.*steel.*ifc#1/i
+  const roots = discoverLayerRoots(raiz)
+  const alvo = roots.find((r) => rx.test(String(r?.name || '').trim()))
+  if (!alvo) {
+    // eslint-disable-next-line no-console
+    console.info(
+      '[3D] Placas (MCMVFX1…Steelifc#1) não encontrada nas raízes:',
+      roots.map((r) => r?.name || '(sem nome)'),
+    )
+    return
+  }
+
+  let meshCount = 0
+  alvo.traverse((o) => {
+    if (o.isMesh) meshCount += 1
+  })
+
+  let maxDepth = 0
+  const medirProf = (o, d) => {
+    maxDepth = Math.max(maxDepth, d)
+    for (const c of o.children || []) medirProf(c, d + 1)
+  }
+  medirProf(alvo, 0)
+
+  const diretos = [...(alvo.children || [])]
+  // eslint-disable-next-line no-console
+  console.info('[3D] Placas — nó raiz:', alvo.name || '(sem nome)')
+  // eslint-disable-next-line no-console
+  console.info(
+    '[3D] Placas — filhos diretos:',
+    diretos.length,
+    diretos.map((k) => `${k.type || '?'} "${k.name || '(sem nome)'}"`),
+  )
+  // eslint-disable-next-line no-console
+  console.info('[3D] Placas — total de meshes nesta etapa:', meshCount)
+  // eslint-disable-next-line no-console
+  console.info('[3D] Placas — profundidade máx. na subárvore:', maxDepth)
+
+  const lines = []
+  const maxLinhas = 80
+  const maxNivel = 5
+  const walk = (o, nivel, prefix) => {
+    if (lines.length >= maxLinhas) return
+    const nome = o.name?.trim() || '(sem nome)'
+    const tipo = o.isMesh ? 'Mesh' : o.type || 'Object3D'
+    if (nivel > 0) {
+      lines.push(`${prefix}${tipo} ${nome}`)
+    }
+    if (nivel >= maxNivel) return
+    for (const c of o.children || []) {
+      walk(c, nivel + 1, `${prefix}  `)
+      if (lines.length >= maxLinhas) return
+    }
+  }
+  walk(alvo, 0, '')
+  if (lines.length >= maxLinhas) lines.push('… (truncado)')
+  // eslint-disable-next-line no-console
+  console.info(`[3D] Placas — árvore (até ${maxNivel} níveis, máx. ${maxLinhas} linhas):\n${lines.join('\n')}`)
+}
+
+function aplicarSombras(raiz) {
+  raiz.traverse((obj) => {
+    if (obj.isMesh) {
+      obj.castShadow = true
+      obj.receiveShadow = true
+    }
+  })
+}
+
+function marcarCamadas(raiz, onLayersReady) {
+  const allRoots = discoverLayerRoots(raiz)
+  const roots = allRoots.filter((r) => !isIgnoredLayerRootName(r.name))
+
+  const groups = new Map()
+  roots.forEach((root, i) => {
+    const rawName = root.name?.trim() ?? ''
+    const mg = mergeGroupKey(rawName)
+    const key = mg ?? `__one:${i}`
+    if (!groups.has(key)) {
+      const displayName =
+        mg === 'wall'
+          ? 'Paredes em Steel Frame'
+          : mg === 'tr-lsf-laje'
+            ? 'Cobertura'
+            : prettyLayerRootLabel(rawName, i)
+      groups.set(key, { displayName, roots: [] })
+    }
+    groups.get(key).roots.push(root)
+  })
+
+  let layerIdx = 0
+  const layers = []
+  for (const { displayName, roots: gRoots } of groups.values()) {
+    for (const root of gRoots) {
+      root.traverse((o) => {
+        o.userData[VIZ_LAYER] = layerIdx
+      })
+    }
+    layers.push({ id: layerIdx, name: displayName })
+    layerIdx += 1
+  }
+
+  raiz.traverse((o) => {
+    if (o.userData[VIZ_SKIP_LAYER]) return
+    if (o.userData[VIZ_LAYER] === undefined) {
+      o.userData[VIZ_LAYER] = -1
+    }
+  })
+
+  raiz.traverse((o) => {
+    if (!isIgnoredLayerRootName(o.name)) return
+    o.traverse((x) => {
+      x.userData[VIZ_SKIP_LAYER] = true
+      x.visible = false
+    })
+  })
+
+  onLayersReady?.(layers)
+}
+
+function aplicarVisibilidadeCamadas(raiz, layerVisibility) {
+  raiz.traverse((o) => {
+    if (o.userData[VIZ_SKIP_LAYER]) {
+      o.visible = false
+      return
+    }
+    const L = o.userData[VIZ_LAYER]
+    if (L === undefined || L < 0) {
+      o.visible = true
+      return
+    }
+    o.visible = layerVisibility[L] !== false
+  })
+}
+
+function ParteModelo({ url, layerVisibility, onLayersReady }) {
   const { scene } = useGLTF(url)
   const raiz = useMemo(() => scene.clone(true), [scene])
+  const onReadyRef = useRef(onLayersReady)
+  onReadyRef.current = onLayersReady
+  const debugOnceRef = useRef(false)
 
   useLayoutEffect(() => {
-    raiz.traverse((obj) => {
-      if (obj.isMesh) {
-        obj.castShadow = true
-        obj.receiveShadow = true
-      }
-    })
+    aplicarSombras(raiz)
+    marcarCamadas(raiz, (layers) => onReadyRef.current?.(layers))
+    if (import.meta.env.DEV && !debugOnceRef.current) {
+      debugOnceRef.current = true
+      logSubgruposEtapaPlacas(raiz)
+    }
   }, [raiz])
+
+  useLayoutEffect(() => {
+    aplicarVisibilidadeCamadas(raiz, layerVisibility)
+  }, [raiz, layerVisibility])
 
   return <primitive object={raiz} />
 }
 
-function GrupoModelosNormalizado({ urls }) {
+/** Recalcula enquadramento quando camadas mudam (objetos ocultos saem do bounding box). */
+function AjustarBoundsAoMudarCamadas({ layerVisibilityKey }) {
+  const bounds = useBounds()
+  useLayoutEffect(() => {
+    bounds.refresh()
+    bounds.clip()
+    bounds.fit()
+  }, [layerVisibilityKey, bounds])
+  return null
+}
+
+function GrupoModelosNormalizado({ urls, layerVisibility, onLayersReady }) {
   const groupRef = useRef()
   const bounds = useBounds()
   const urlsKey = urls.join('|')
@@ -76,7 +313,7 @@ function GrupoModelosNormalizado({ urls }) {
   return (
     <group ref={groupRef}>
       {urls.map((url) => (
-        <ParteModelo key={url} url={url} />
+        <ParteModelo key={url} url={url} layerVisibility={layerVisibility} onLayersReady={onLayersReady} />
       ))}
     </group>
   )
@@ -104,12 +341,13 @@ function AlvoOrbitaProximoDaBase() {
   return null
 }
 
-function CenaComEnquadramento({ children, boundsKey }) {
+function CenaComEnquadramento({ children, boundsKey, layerVisibilityKey }) {
   return (
     <Bounds key={boundsKey} fit clip observe margin={1.08} maxDuration={0.75}>
       <Center bottom cacheKey={boundsKey}>
         {children}
       </Center>
+      <AjustarBoundsAoMudarCamadas layerVisibilityKey={layerVisibilityKey} />
       <AlvoOrbitaProximoDaBase />
     </Bounds>
   )
@@ -117,10 +355,13 @@ function CenaComEnquadramento({ children, boundsKey }) {
 
 /**
  * Cena com um ou mais GLB / glTF do empreendimento (ex.: arquitetura + hidrossanitário).
+ * @param {Record<number, boolean>} [layerVisibility] — id da camada (0…) → visível; false oculta.
+ * @param {(layers: { id: number, name: string }[]) => void} [onLayersReady]
  */
-export default function Cena3DEmpreendimento({ modelUrls }) {
+export default function Cena3DEmpreendimento({ modelUrls, layerVisibility = {}, onLayersReady }) {
   const urls = Array.isArray(modelUrls) ? modelUrls : modelUrls ? [modelUrls] : []
   const boundsKey = urls.join('|')
+  const layerVisibilityKey = JSON.stringify(layerVisibility)
 
   return (
     <Canvas
@@ -147,8 +388,12 @@ export default function Cena3DEmpreendimento({ modelUrls }) {
       <hemisphereLight args={['#f0f4f8', '#9ca3af', 0.35]} />
 
       <Suspense fallback={null}>
-        <CenaComEnquadramento boundsKey={boundsKey}>
-          <GrupoModelosNormalizado urls={urls} />
+        <CenaComEnquadramento boundsKey={boundsKey} layerVisibilityKey={layerVisibilityKey}>
+          <GrupoModelosNormalizado
+            urls={urls}
+            layerVisibility={layerVisibility}
+            onLayersReady={onLayersReady}
+          />
         </CenaComEnquadramento>
       </Suspense>
 

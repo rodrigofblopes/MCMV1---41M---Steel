@@ -15,14 +15,6 @@ function criarIconePreco(cor) {
   })
 }
 
-/** Pin numerado (modo análise de distância ao empreendimento), estilo próximo a mapas de viabilidade. */
-const iconeTerrenoMapa = L.divIcon({
-  className: 'avalia-marcador-terreno-amostra',
-  html: `<div style="background:#b45309;width:16px;height:16px;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>`,
-  iconSize: [20, 20],
-  iconAnchor: [10, 10],
-})
-
 const iconeServicoMapa = L.divIcon({
   className: 'avalia-marcador-servico-amostra',
   html: `<div style="background:#64748b;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>`,
@@ -42,20 +34,12 @@ function criarIconeAmostraNumerada(num) {
   })
 }
 
-function rotuloAmostra(nome, nomesCompletos) {
-  if (!nome) return 'Amostra'
-  if (nomesCompletos) return nome
-  const curto = nome.split(' - ')[0]?.trim() || nome
-  return curto.length > 22 ? `${curto.slice(0, 22)}…` : curto
-}
-
 export default function MarkerLayer({
   amostras,
   precoMedio,
   camadaPrecos,
   visivelPorId,
   mostrarNomes,
-  mostrarNomesCompletos,
   /** Com raios 500/1000m ativos: marcadores amarelos numerados (#1, #2…) para cruzar com a lista. */
   modoAnaliseDistancia = false,
 }) {
@@ -72,7 +56,12 @@ export default function MarkerLayer({
     <>
       {camadaPrecos
         ? amostras
-            .filter((a) => Number.isFinite(Number(a.lat)) && Number.isFinite(Number(a.lng)))
+            .filter(
+              (a) =>
+                Number.isFinite(Number(a.lat)) &&
+                Number.isFinite(Number(a.lng)) &&
+                a.tipo !== 'terreno',
+            )
             .map((a) => {
               if (visivelPorId[a.id] === false) return null
               const ordemLista = amostras.findIndex((x) => x.id === a.id) + 1
@@ -82,8 +71,6 @@ export default function MarkerLayer({
                 icone = criarIconeAmostraNumerada(ordemLista)
               } else if (a.tipo === 'servico') {
                 icone = iconeServicoMapa
-              } else if (a.tipo === 'terreno') {
-                icone = iconeTerrenoMapa
               } else {
                 icone = iconesPreco[faixa]
               }
@@ -93,9 +80,9 @@ export default function MarkerLayer({
                     <Popup className="avalia-popup-amostra" minWidth={300} maxWidth={340}>
                       <AmostraMapPopup amostra={a} />
                     </Popup>
-                    {mostrarNomes ? (
+                    {mostrarNomes && !modoAnaliseDistancia ? (
                       <Tooltip direction="top" offset={[0, -8]} opacity={0.95} permanent>
-                        {rotuloAmostra(a.nome, mostrarNomesCompletos)}
+                        #{ordemLista}
                       </Tooltip>
                     ) : null}
                   </Marker>

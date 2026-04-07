@@ -61,7 +61,7 @@ export default function StatsCard({
         className={[
           'mt-2 font-semibold tracking-tight',
           hero
-            ? 'text-3xl text-white sm:text-4xl'
+            ? 'text-[1.65rem] text-white sm:text-4xl md:text-5xl'
             : ['text-[#1e293b]', grande ? 'text-3xl sm:text-4xl' : 'text-2xl'].join(' '),
         ].join(' ')}
       >
