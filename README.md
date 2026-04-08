@@ -16,6 +16,18 @@ npm install
 npm run dev
 ```
 
+## Custos SINAPI (planilha → JSON)
+
+Coloque a planilha sintética **`.xlsx`** na **raiz** do projeto (o ficheiro não é versionado; está em `.gitignore`). Depois regenere os dados da página Custos:
+
+```bash
+npm run data:sinapi
+```
+
+Isto lê o primeiro `.xlsx` adequado na raiz (prioridade: **Casa Popular** com **St** e Sintético/Material) e grava `src/data/sinapiOrcamento.json`, que é o que o site usa.
+
+Para pré-visualizar folhas e linhas: `npm run inspect:sinapi`.
+
 ## Build
 
 ```bash

@@ -1,20 +1,20 @@
 {
-  "geradoEm": "2026-04-06T02:36:57.722Z",
+  "geradoEm": "2026-04-08T15:25:31.696Z",
   "cabecalho": {
-    "planilhaTitulo": "Planilha Orçamentária Sintética (provisória — substituir pelo export steel em src/data/)",
-    "obra": "MCMV1 — 43 m² — Steel (valores espelho Bloco até planilha steel)",
+    "planilhaTitulo": "Planilha Orçamentária Sintética Com Valor do Material e da Mão de Obra",
+    "obra": "Casa Popular MCMV Faixa 1 - Steel Frame - 41 m²",
     "sinapiReferencia": "SINAPI - 01/2026 - Rondônia",
     "bdi": "0,0%",
     "notaEncargos": "Desonerado: embutido nos preços unitário dos insumos de mão de obra, de acordo com as bases.",
-    "arquivoOrigem": "Casa Popular MCMV Faixa 1 - Bl - Sintético com Valor da Mão de Obra e Material (1).xlsx"
+    "arquivoOrigem": "Casa Popular MCMV Faixa 1 - St - Sintético com Valor da Mão de Obra e Material.xlsx"
   },
   "resumoTotais": {
-    "totalMO": "25.641,66",
-    "totalMAT": "66.143,09",
-    "totalComposicao": "91.784,75",
-    "totalSemBDI": "91,784.75",
+    "totalMO": "23.181,91",
+    "totalMAT": "99.234,14",
+    "totalComposicao": "122.416,05",
+    "totalSemBDI": "122,416.05",
     "totalBDI": "0.00",
-    "totalGeral": "91,784.75"
+    "totalGeral": "122,416.05"
   },
   "linhas": [
     {
@@ -29,14 +29,14 @@
       "item": "2",
       "descricao": "FUNDAÇÕES E CONTENÇÕES",
       "total": "9,960.25",
-      "peso": "0.10851748247938792"
+      "peso": "0.08136392245951408"
     },
     {
       "tipo": "secao",
       "item": "2.1",
       "descricao": "FUNDAÇÕES",
       "total": "9,726.01",
-      "peso": "0.1059654245394796"
+      "peso": "0.07945044787836235"
     },
     {
       "tipo": "servico",
@@ -53,7 +53,7 @@
       "totalMO": "145.95",
       "totalMAT": "72.39",
       "total": "218.34",
-      "peso": "0.002378826547983189"
+      "peso": "0.001783589651847123"
     },
     {
       "tipo": "servico",
@@ -70,7 +70,7 @@
       "totalMO": "21.83",
       "totalMAT": "146.52",
       "total": "168.35",
-      "peso": "0.0018341826937481444"
+      "peso": "0.0013752281665680276"
     },
     {
       "tipo": "servico",
@@ -87,7 +87,7 @@
       "totalMO": "245.80",
       "totalMAT": "174.65",
       "total": "420.45",
-      "peso": "0.004580826335529595"
+      "peso": "0.003434598649441801"
     },
     {
       "tipo": "servico",
@@ -104,7 +104,7 @@
       "totalMO": "571.44",
       "totalMAT": "3,340.72",
       "total": "3,912.16",
-      "peso": "0.04262320265621468"
+      "peso": "0.03195790094517835"
     },
     {
       "tipo": "servico",
@@ -121,14 +121,14 @@
       "totalMO": "505.06",
       "totalMAT": "4,501.65",
       "total": "5,006.71",
-      "peso": "0.05454838630600399"
+      "peso": "0.040899130465327053"
     },
     {
       "tipo": "secao",
       "item": "2.2",
       "descricao": "IMPERMEABILIZAÇÃO",
       "total": "234.24",
-      "peso": "0.002552057939908318"
+      "peso": "0.0019134745811517362"
     },
     {
       "tipo": "servico",
@@ -145,113 +145,164 @@
       "totalMO": "102.37",
       "totalMAT": "131.87",
       "total": "234.24",
-      "peso": "0.002552057939908318"
+      "peso": "0.0019134745811517362"
     },
     {
       "tipo": "secao",
       "item": "3",
       "descricao": "SUPERESTRUTURA",
-      "total": "1,509.37",
-      "peso": "0.016444670819498883"
+      "total": "32,765.09",
+      "peso": "0.2676535470634774"
     },
     {
       "tipo": "servico",
       "item": "3.1",
-      "codigo": "90284",
-      "banco": "SINAPI",
-      "descricao": "GRAUTE FGK=25 MPA; TRAÇO 1:1,3:1,6:0,4 (EM MASSA SECA DE CIMENTO/ AREIA GROSSA/ BRITA 0/ ADITIVO) - PREPARO MECÂNICO COM BETONEIRA 400 L. AF_09/2021",
-      "und": "m³",
-      "quant": "1.5",
-      "valorUnit": "1,006.25",
-      "vuMO": "71.94",
-      "vuMAT": "934.31",
-      "vuTotal": "1,006.25",
-      "totalMO": "107.91",
-      "totalMAT": "1,401.46",
-      "total": "1,509.37",
-      "peso": "0.016444670819498883"
+      "codigo": "96370_ADP_01",
+      "banco": "Próprio",
+      "descricao": "PAREDE ESTRUTURAL EM LIGHT STEEL FRAME - FORNECIMENTO E INSTALAÇÃO",
+      "und": "m²",
+      "quant": "112.68",
+      "valorUnit": "258.75",
+      "vuMO": "22.89",
+      "vuMAT": "235.86",
+      "vuTotal": "258.75",
+      "totalMO": "2,579.25",
+      "totalMAT": "26,576.70",
+      "total": "29,155.95",
+      "peso": "0.2381709751294867"
+    },
+    {
+      "tipo": "servico",
+      "item": "3.2",
+      "codigo": "102653_ADP_02",
+      "banco": "Próprio",
+      "descricao": "ISOLAMENTO ACÚSTICO - FORNECIMENTO E INSTALAÇÃO",
+      "und": "m²",
+      "quant": "112.68",
+      "valorUnit": "32.03",
+      "vuMO": "5.30",
+      "vuMAT": "26.73",
+      "vuTotal": "32.03",
+      "totalMO": "597.20",
+      "totalMAT": "3,011.94",
+      "total": "3,609.14",
+      "peso": "0.029482571933990682"
     },
     {
       "tipo": "secao",
       "item": "4",
       "descricao": "PAREDES E PAINÉIS",
-      "total": "36,839.28",
-      "peso": "0.40136602213330647"
+      "total": "35,333.79",
+      "peso": "0.288636906680129"
     },
     {
       "tipo": "secao",
       "item": "4.1",
       "descricao": "ALVENARIA/FECHAMENTOS",
-      "total": "31,903.68",
-      "peso": "0.34759238326628333"
+      "total": "30,398.19",
+      "peso": "0.24831866409674222"
     },
     {
       "tipo": "servico",
       "item": "4.1.1",
-      "codigo": "89472",
-      "banco": "SINAPI",
-      "descricao": "ALVENARIA DE BLOCOS DE CONCRETO ESTRUTURAL 14X19X39 CM (ESPESSURA 14 CM), FBK = 14 MPA, UTILIZANDO COLHER DE PEDREIRO. AF_10/2022",
+      "codigo": "96370_ADP_03",
+      "banco": "Próprio",
+      "descricao": "PLACA OSB(Oriented Strand Board) - INSTALAÇÃO E FORNECIMENTO",
       "und": "m²",
-      "quant": "112.68",
-      "valorUnit": "156.99",
-      "vuMO": "27.58",
-      "vuMAT": "129.41",
-      "vuTotal": "156.99",
-      "totalMO": "3,107.71",
-      "totalMAT": "14,581.92",
-      "total": "17,689.63",
-      "peso": "0.19272951116607062"
+      "quant": "103.48",
+      "valorUnit": "129.96",
+      "vuMO": "10.39",
+      "vuMAT": "119.57",
+      "vuTotal": "129.96",
+      "totalMO": "1,075.16",
+      "totalMAT": "12,373.10",
+      "total": "13,448.26",
+      "peso": "0.10985699996038101"
     },
     {
       "tipo": "servico",
       "item": "4.1.2",
-      "codigo": "87904",
-      "banco": "SINAPI",
-      "descricao": "CHAPISCO APLICADO EM ALVENARIA (COM PRESENÇA DE VÃOS) E ESTRUTURAS DE CONCRETO DE FACHADA, COM COLHER DE PEDREIRO. ARGAMASSA TRAÇO 1:3 COM PREPARO MANUAL. AF_10/2022",
+      "codigo": "96370_ADP_04",
+      "banco": "Próprio",
+      "descricao": "PLACA ST(Standard) - INSTALAÇÃO E FORNECIMENTO",
       "und": "m²",
-      "quant": "214.34",
-      "valorUnit": "10.00",
-      "vuMO": "5.47",
-      "vuMAT": "4.53",
-      "vuTotal": "10.00",
-      "totalMO": "1,172.44",
-      "totalMAT": "970.96",
-      "total": "2,143.40",
-      "peso": "0.023352463235995085"
+      "quant": "100.29",
+      "valorUnit": "50.62",
+      "vuMO": "8.85",
+      "vuMAT": "41.77",
+      "vuTotal": "50.62",
+      "totalMO": "887.57",
+      "totalMAT": "4,189.10",
+      "total": "5,076.67",
+      "peso": "0.04147062415426735"
     },
     {
       "tipo": "servico",
       "item": "4.1.3",
-      "codigo": "104952",
-      "banco": "SINAPI",
-      "descricao": "MASSA ÚNICA, EM ARGAMASSA TRAÇO 1:2:8, PREPARO MANUAL, APLICADA MANUALMENTE EM PAREDES INTERNAS DE AMBIENTES COM ÁREA MAIOR QUE 10M², E = 17,5MM, COM TALISCAS. AF_03/2024",
+      "codigo": "96370_ADP_05",
+      "banco": "Próprio",
+      "descricao": "PLACA RU (Resistente à umidade) - INSTALAÇÃO E FORNECIMENTO",
       "und": "m²",
-      "quant": "126.25",
-      "valorUnit": "45.20",
-      "vuMO": "17.89",
-      "vuMAT": "27.31",
-      "vuTotal": "45.20",
-      "totalMO": "2,258.61",
-      "totalMAT": "3,447.89",
-      "total": "5,706.50",
-      "peso": "0.062172637611367904"
+      "quant": "21.94",
+      "valorUnit": "67.74",
+      "vuMO": "8.85",
+      "vuMAT": "58.89",
+      "vuTotal": "67.74",
+      "totalMO": "194.17",
+      "totalMAT": "1,292.04",
+      "total": "1,486.21",
+      "peso": "0.012140646590050897"
     },
     {
       "tipo": "servico",
       "item": "4.1.4",
-      "codigo": "87777",
-      "banco": "SINAPI",
-      "descricao": "EMBOÇO OU MASSA ÚNICA EM ARGAMASSA TRAÇO 1:2:8, PREPARO MANUAL, APLICADA MANUALMENTE EM PANOS DE FACHADA COM PRESENÇA DE VÃOS, ESPESSURA DE 25 MM. AF_08/2022",
+      "codigo": "96370_ADP_06",
+      "banco": "Próprio",
+      "descricao": "PLACA GLASROC X - INSTALAÇÃO E FORNECIMENTO",
       "und": "m²",
-      "quant": "91.19",
-      "valorUnit": "69.79",
-      "vuMO": "32.90",
-      "vuMAT": "36.89",
-      "vuTotal": "69.79",
-      "totalMO": "3,000.15",
-      "totalMAT": "3,364.00",
-      "total": "6,364.15",
-      "peso": "0.06933777125284973"
+      "quant": "81.13",
+      "valorUnit": "66.45",
+      "vuMO": "11.75",
+      "vuMAT": "54.70",
+      "vuTotal": "66.45",
+      "totalMO": "953.28",
+      "totalMAT": "4,437.80",
+      "total": "5,391.08",
+      "peso": "0.0440389965204726"
+    },
+    {
+      "tipo": "servico",
+      "item": "4.1.5",
+      "codigo": "96370_ADP_07",
+      "banco": "Próprio",
+      "descricao": "Basecoat + Tela de fibra de vidro - INSTALAÇÃO E FORNECIMENTO",
+      "und": "m²",
+      "quant": "81.13",
+      "valorUnit": "25.52",
+      "vuMO": "12.99",
+      "vuMAT": "12.53",
+      "vuTotal": "25.52",
+      "totalMO": "1,053.88",
+      "totalMAT": "1,016.55",
+      "total": "2,070.43",
+      "peso": "0.016913060011330215"
+    },
+    {
+      "tipo": "servico",
+      "item": "4.1.6",
+      "codigo": "96370_ADP_08",
+      "banco": "Próprio",
+      "descricao": "Membrana Hidrófuga - INSTALAÇÃO E FORNECIMENTO",
+      "und": "m²",
+      "quant": "81.13",
+      "valorUnit": "36.06",
+      "vuMO": "6.49",
+      "vuMAT": "29.57",
+      "vuTotal": "36.06",
+      "totalMO": "526.53",
+      "totalMAT": "2,399.01",
+      "total": "2,925.54",
+      "peso": "0.02389833686024014"
     },
     {
       "tipo": "secao",
@@ -265,7 +316,7 @@
       "item": "4.3",
       "descricao": "ESQUADRIAS DE MADEIRAS",
       "total": "4,935.60",
-      "peso": "0.05377363886702312"
+      "peso": "0.04031824258338674"
     },
     {
       "tipo": "servico",
@@ -282,72 +333,72 @@
       "totalMO": "1,380.40",
       "totalMAT": "3,555.20",
       "total": "4,935.60",
-      "peso": "0.05377363886702312"
+      "peso": "0.04031824258338674"
     },
     {
       "tipo": "secao",
       "item": "5",
       "descricao": "COBERTURA E PROTEÇÕES",
-      "total": "8,257.12",
-      "peso": "0.08996178559074355"
+      "total": "9,256.07",
+      "peso": "0.0756115721753806"
     },
     {
       "tipo": "secao",
       "item": "5.1",
       "descricao": "TELHADOS",
-      "total": "8,257.12",
-      "peso": "0.08996178559074355"
+      "total": "9,256.07",
+      "peso": "0.0756115721753806"
     },
     {
       "tipo": "servico",
       "item": "5.1.1",
-      "codigo": "94189",
-      "banco": "SINAPI",
-      "descricao": "TELHAMENTO COM TELHA DE CONCRETO DE ENCAIXE, COM ATÉ 2 ÁGUAS, INCLUSO TRANSPORTE VERTICAL. AF_07/2019",
+      "codigo": "ESTCOB",
+      "banco": "Próprio",
+      "descricao": "ESTRUTURA TELHADO STEEL FRAME",
       "und": "m²",
-      "quant": "55.7",
-      "valorUnit": "57.22",
-      "vuMO": "4.26",
-      "vuMAT": "52.96",
-      "vuTotal": "57.22",
-      "totalMO": "237.28",
-      "totalMAT": "2,949.87",
-      "total": "3,187.15",
-      "peso": "0.034724178036111664"
+      "quant": "55.66",
+      "valorUnit": "96.92",
+      "vuMO": "14.13",
+      "vuMAT": "82.79",
+      "vuTotal": "96.92",
+      "totalMO": "786.48",
+      "totalMAT": "4,608.08",
+      "total": "5,394.56",
+      "peso": "0.044067424165377005"
     },
     {
       "tipo": "servico",
       "item": "5.1.2",
-      "codigo": "94222",
+      "codigo": "100325",
       "banco": "SINAPI",
-      "descricao": "CUMEEIRA PARA TELHA DE CONCRETO EMBOÇADA COM ARGAMASSA TRAÇO 1:2:9 (CIMENTO, CAL E AREIA) PARA TELHADOS COM ATÉ 2 ÁGUAS, INCLUSO TRANSPORTE VERTICAL. AF_07/2019",
+      "descricao": "CUMEEIRA SHED PARA TELHA ONDULADA DE FIBROCIMENTO, E = 6 MM, INCLUSO ACESSÓRIOS DE FIXAÇÃO E IÇAMENTO. AF_07/2019",
       "und": "M",
-      "quant": "7.4",
-      "valorUnit": "67.39",
-      "vuMO": "8.48",
-      "vuMAT": "58.91",
-      "vuTotal": "67.39",
-      "totalMO": "62.75",
-      "totalMAT": "435.93",
-      "total": "498.68",
-      "peso": "0.005433146573913423"
+      "quant": "7.22",
+      "valorUnit": "93.72",
+      "vuMO": "1.91",
+      "vuMAT": "91.81",
+      "vuTotal": "93.72",
+      "totalMO": "13.79",
+      "totalMAT": "662.86",
+      "total": "676.65",
+      "peso": "0.005527461472576513"
     },
     {
       "tipo": "servico",
       "item": "5.1.3",
-      "codigo": "92539",
+      "codigo": "94189",
       "banco": "SINAPI",
-      "descricao": "TRAMA DE MADEIRA COMPOSTA POR RIPAS, CAIBROS E TERÇAS PARA TELHADOS DE ATÉ 2 ÁGUAS PARA TELHA CERÂMICA OU DE CONCRETO, INCLUSO TRANSPORTE VERTICAL. AF_10/2025",
+      "descricao": "TELHAMENTO COM TELHA DE CONCRETO DE ENCAIXE, COM ATÉ 2 ÁGUAS, INCLUSO TRANSPORTE VERTICAL. AF_07/2019",
       "und": "m²",
-      "quant": "55.7",
-      "valorUnit": "82.07",
-      "vuMO": "24.25",
-      "vuMAT": "57.82",
-      "vuTotal": "82.07",
-      "totalMO": "1,350.72",
-      "totalMAT": "3,220.57",
-      "total": "4,571.29",
-      "peso": "0.049804460980718473"
+      "quant": "55.66",
+      "valorUnit": "57.22",
+      "vuMO": "4.26",
+      "vuMAT": "52.96",
+      "vuTotal": "57.22",
+      "totalMO": "237.11",
+      "totalMAT": "2,947.75",
+      "total": "3,184.86",
+      "peso": "0.02601668653742708"
     },
     {
       "tipo": "secao",
@@ -361,14 +412,14 @@
       "item": "6",
       "descricao": "REVESTIMENTOS",
       "total": "13,035.38",
-      "peso": "0.14202119633163462"
+      "peso": "0.10648423960746978"
     },
     {
       "tipo": "secao",
       "item": "6.1",
       "descricao": "REVESTIMENTOS INTERNOS",
       "total": "2,416.42",
-      "peso": "0.026327031451303187"
+      "peso": "0.019739405086179468"
     },
     {
       "tipo": "servico",
@@ -385,14 +436,14 @@
       "totalMO": "1,251.14",
       "totalMAT": "1,165.28",
       "total": "2,416.42",
-      "peso": "0.026327031451303187"
+      "peso": "0.019739405086179468"
     },
     {
       "tipo": "secao",
       "item": "6.2",
       "descricao": "REVESTIMENTOS CERÂMICOS",
       "total": "1,280.11",
-      "peso": "0.013946870258948247"
+      "peso": "0.01045704382717789"
     },
     {
       "tipo": "servico",
@@ -409,14 +460,14 @@
       "totalMO": "371.78",
       "totalMAT": "908.33",
       "total": "1,280.11",
-      "peso": "0.013946870258948247"
+      "peso": "0.01045704382717789"
     },
     {
       "tipo": "secao",
       "item": "6.3",
       "descricao": "REVESTIMENTOS EXTERNOS",
       "total": "2,859.71",
-      "peso": "0.031156700868063596"
+      "peso": "0.023360580577465127"
     },
     {
       "tipo": "servico",
@@ -433,14 +484,14 @@
       "totalMO": "1,415.27",
       "totalMAT": "1,444.44",
       "total": "2,859.71",
-      "peso": "0.031156700868063596"
+      "peso": "0.023360580577465127"
     },
     {
       "tipo": "secao",
       "item": "6.4",
       "descricao": "FORROS",
       "total": "2,699.69",
-      "peso": "0.029413273991594463"
+      "peso": "0.02205339904367115"
     },
     {
       "tipo": "servico",
@@ -457,21 +508,21 @@
       "totalMO": "561.63",
       "totalMAT": "2,138.06",
       "total": "2,699.69",
-      "peso": "0.029413273991594463"
+      "peso": "0.02205339904367115"
     },
     {
       "tipo": "secao",
       "item": "6.5",
       "descricao": "PINTURA",
       "total": "3,779.45",
-      "peso": "0.041177319761725124"
+      "peso": "0.030873811072976133"
     },
     {
       "tipo": "secao",
       "item": "6.5.1",
       "descricao": "PINTURAS INTERNAS",
       "total": "1,987.17",
-      "peso": "0.021650328622129494"
+      "peso": "0.016232920438128823"
     },
     {
       "tipo": "servico",
@@ -488,7 +539,7 @@
       "totalMO": "229.78",
       "totalMAT": "267.64",
       "total": "497.42",
-      "peso": "0.005419418803232563"
+      "peso": "0.004063356071364825"
     },
     {
       "tipo": "servico",
@@ -505,14 +556,14 @@
       "totalMO": "564.34",
       "totalMAT": "925.41",
       "total": "1,489.75",
-      "peso": "0.01623090981889693"
+      "peso": "0.012169564366763998"
     },
     {
       "tipo": "secao",
       "item": "6.5.2",
       "descricao": "PINTURAS EXTERNAS",
       "total": "1,469.98",
-      "peso": "0.01601551455988059"
+      "peso": "0.012008065935798451"
     },
     {
       "tipo": "servico",
@@ -529,7 +580,7 @@
       "totalMO": "125.84",
       "totalMAT": "268.10",
       "total": "393.94",
-      "peso": "0.004291998398426754"
+      "peso": "0.003218042078632663"
     },
     {
       "tipo": "servico",
@@ -546,14 +597,14 @@
       "totalMO": "407.62",
       "totalMAT": "668.42",
       "total": "1,076.04",
-      "peso": "0.011723516161453836"
+      "peso": "0.008790023857165789"
     },
     {
       "tipo": "secao",
       "item": "6.5.3",
       "descricao": "PINTURAS ESQUADRIAS",
       "total": "322.30",
-      "peso": "0.0035114765797150398"
+      "peso": "0.0026328246990488585"
     },
     {
       "tipo": "servico",
@@ -570,7 +621,7 @@
       "totalMO": "7.83",
       "totalMAT": "6.68",
       "total": "14.51",
-      "peso": "0.00015808726395180028"
+      "peso": "0.00011853020906980744"
     },
     {
       "tipo": "servico",
@@ -587,7 +638,7 @@
       "totalMO": "40.84",
       "totalMAT": "143.77",
       "total": "184.61",
-      "peso": "0.002011336305867805"
+      "peso": "0.0015080538867248208"
     },
     {
       "tipo": "servico",
@@ -604,21 +655,21 @@
       "totalMO": "55.42",
       "totalMAT": "67.76",
       "total": "123.18",
-      "peso": "0.0013420530098954347"
+      "peso": "0.0010062406032542302"
     },
     {
       "tipo": "secao",
       "item": "7",
       "descricao": "PAVIMENTAÇÕES",
       "total": "4,690.74",
-      "peso": "0.051105875431376124"
+      "peso": "0.038318014672095696"
     },
     {
       "tipo": "secao",
       "item": "7.1",
       "descricao": "PISO CERÂMICO",
       "total": "2,881.73",
-      "peso": "0.03139661000329576"
+      "peso": "0.0235404589512568"
     },
     {
       "tipo": "servico",
@@ -635,7 +686,7 @@
       "totalMO": "218.17",
       "totalMAT": "1,042.58",
       "total": "1,260.75",
-      "peso": "0.013735941972931234"
+      "peso": "0.010298894630238437"
     },
     {
       "tipo": "servico",
@@ -652,7 +703,7 @@
       "totalMO": "82.64",
       "totalMAT": "668.82",
       "total": "751.46",
-      "peso": "0.008187198853840099"
+      "peso": "0.006138574149386457"
     },
     {
       "tipo": "servico",
@@ -669,7 +720,7 @@
       "totalMO": "188.84",
       "totalMAT": "680.68",
       "total": "869.52",
-      "peso": "0.009473469176524422"
+      "peso": "0.007102990171631906"
     },
     {
       "tipo": "secao",
@@ -683,7 +734,7 @@
       "item": "7.3",
       "descricao": "RODAPÉS, SOLEIRAS E PEITORIS",
       "total": "1,809.01",
-      "peso": "0.019709265428080373"
+      "peso": "0.014777555720838893"
     },
     {
       "tipo": "servico",
@@ -700,7 +751,7 @@
       "totalMO": "43.75",
       "totalMAT": "275.28",
       "total": "319.03",
-      "peso": "0.0034758497462813813"
+      "peso": "0.002606112515474891"
     },
     {
       "tipo": "servico",
@@ -717,7 +768,7 @@
       "totalMO": "80.09",
       "totalMAT": "285.33",
       "total": "365.42",
-      "peso": "0.003981271398571113"
+      "peso": "0.002985066092232187"
     },
     {
       "tipo": "servico",
@@ -734,28 +785,28 @@
       "totalMO": "166.07",
       "totalMAT": "958.49",
       "total": "1,124.56",
-      "peso": "0.012252144283227878"
+      "peso": "0.009186377113131815"
     },
     {
       "tipo": "secao",
       "item": "8",
       "descricao": "INSTALAÇÕES",
-      "total": "16,888.86",
-      "peso": "0.1840050770961407"
+      "total": "16,770.98",
+      "peso": "0.13699984601692344"
     },
     {
       "tipo": "secao",
       "item": "8.1",
       "descricao": "ELÉTRICAS/TELEFÔNICAS",
-      "total": "8,724.87",
-      "peso": "0.09505794807961017"
+      "total": "8,606.99",
+      "peso": "0.0703093262689002"
     },
     {
       "tipo": "secao",
       "item": "8.1.1",
       "descricao": "CENTRO DE DISTRIBUIÇÃO ELÉTRICA",
       "total": "2,251.77",
-      "peso": "0.024533160465109945"
+      "peso": "0.018394401714481066"
     },
     {
       "tipo": "servico",
@@ -772,7 +823,7 @@
       "totalMO": "3.03",
       "totalMAT": "51.49",
       "total": "54.52",
-      "peso": "0.0005939984583495624"
+      "peso": "0.0004453664368356927"
     },
     {
       "tipo": "servico",
@@ -789,7 +840,7 @@
       "totalMO": "6.01",
       "totalMAT": "65.81",
       "total": "71.82",
-      "peso": "0.0007824829288089797"
+      "peso": "0.0005866877750098945"
     },
     {
       "tipo": "servico",
@@ -806,7 +857,7 @@
       "totalMO": "8.00",
       "totalMAT": "105.26",
       "total": "113.26",
-      "peso": "0.0012339740534239075"
+      "peso": "0.0009252054775497167"
     },
     {
       "tipo": "servico",
@@ -823,7 +874,7 @@
       "totalMO": "56.83",
       "totalMAT": "82.98",
       "total": "139.81",
-      "peso": "0.0015232377927705855"
+      "peso": "0.001142088802897986"
     },
     {
       "tipo": "servico",
@@ -840,14 +891,14 @@
       "totalMO": "401.97",
       "totalMAT": "1,470.39",
       "total": "1,872.36",
-      "peso": "0.02039946723175691"
+      "peso": "0.015295053222187776"
     },
     {
       "tipo": "secao",
       "item": "8.1.2",
       "descricao": "ILUMINAÇÃO, TOMADAS E INTERRUPTORES",
-      "total": "1,797.51",
-      "peso": "0.019583972282977292"
+      "total": "1,679.63",
+      "peso": "0.013720668164019342"
     },
     {
       "tipo": "servico",
@@ -864,7 +915,7 @@
       "totalMO": "84.90",
       "totalMAT": "83.16",
       "total": "168.06",
-      "peso": "0.0018310231274803277"
+      "peso": "0.0013728591961593272"
     },
     {
       "tipo": "servico",
@@ -881,7 +932,7 @@
       "totalMO": "92.52",
       "totalMAT": "106.68",
       "total": "199.20",
-      "peso": "0.0021702951743072787"
+      "peso": "0.0016272376048728904"
     },
     {
       "tipo": "servico",
@@ -898,7 +949,7 @@
       "totalMO": "22.70",
       "totalMAT": "27.85",
       "total": "50.55",
-      "peso": "0.0005507450856487597"
+      "peso": "0.00041293604882693076"
     },
     {
       "tipo": "servico",
@@ -915,7 +966,7 @@
       "totalMO": "174.24",
       "totalMAT": "208.67",
       "total": "382.91",
-      "peso": "0.004171825929688755"
+      "peso": "0.0031279395144672615"
     },
     {
       "tipo": "servico",
@@ -932,7 +983,7 @@
       "totalMO": "76.24",
       "totalMAT": "80.52",
       "total": "156.76",
-      "peso": "0.0017079089935964308"
+      "peso": "0.0012805510388547907"
     },
     {
       "tipo": "servico",
@@ -949,7 +1000,7 @@
       "totalMO": "54.74",
       "totalMAT": "50.98",
       "total": "105.72",
-      "peso": "0.0011518253304606703"
+      "peso": "0.0008636122469235039"
     },
     {
       "tipo": "servico",
@@ -966,7 +1017,7 @@
       "totalMO": "7.78",
       "totalMAT": "11.32",
       "total": "19.10",
-      "peso": "0.00020809557143207342"
+      "peso": "0.00015602529243510145"
     },
     {
       "tipo": "servico",
@@ -983,7 +1034,7 @@
       "totalMO": "78.65",
       "totalMAT": "59.95",
       "total": "138.60",
-      "peso": "0.0015100547748945223"
+      "peso": "0.0011322044780892701"
     },
     {
       "tipo": "servico",
@@ -1000,7 +1051,7 @@
       "totalMO": "138.49",
       "totalMAT": "81.62",
       "total": "220.11",
-      "peso": "0.0023981107972729674"
+      "peso": "0.0017980485402036743"
     },
     {
       "tipo": "servico",
@@ -1017,28 +1068,11 @@
       "totalMO": "47.38",
       "totalMAT": "22.84",
       "total": "70.22",
-      "peso": "0.0007650508390555076"
+      "peso": "0.0005736175934446504"
     },
     {
       "tipo": "servico",
       "item": "8.1.2.11",
-      "codigo": "91937",
-      "banco": "SINAPI",
-      "descricao": "CAIXA OCTOGONAL 3\" X 3\", PVC, INSTALADA EM LAJE - FORNECIMENTO E INSTALAÇÃO. AF_03/2023",
-      "und": "UN",
-      "quant": "7",
-      "valorUnit": "16.84",
-      "vuMO": "9.51",
-      "vuMAT": "7.33",
-      "vuTotal": "16.84",
-      "totalMO": "66.57",
-      "totalMAT": "51.31",
-      "total": "117.88",
-      "peso": "0.0012843092125870584"
-    },
-    {
-      "tipo": "servico",
-      "item": "8.1.2.12",
       "codigo": "91937",
       "banco": "SINAPI",
       "descricao": "CAIXA OCTOGONAL 3\" X 3\", PVC, INSTALADA EM LAJE - FORNECIMENTO E INSTALAÇÃO. AF_03/2023",
@@ -1051,14 +1085,14 @@
       "totalMO": "95.10",
       "totalMAT": "73.30",
       "total": "168.40",
-      "peso": "0.0018347274465529404"
+      "peso": "0.0013756366097419416"
     },
     {
       "tipo": "secao",
       "item": "8.1.3",
       "descricao": "FIOS E CABOS",
       "total": "4,675.59",
-      "peso": "0.05094081533152294"
+      "peso": "0.03819425639039979"
     },
     {
       "tipo": "servico",
@@ -1075,7 +1109,7 @@
       "totalMO": "84.28",
       "totalMAT": "212.42",
       "total": "296.70",
-      "peso": "0.0032325631436594857"
+      "peso": "0.002423701794004953"
     },
     {
       "tipo": "servico",
@@ -1092,7 +1126,7 @@
       "totalMO": "290.16",
       "totalMAT": "882.18",
       "total": "1,172.34",
-      "peso": "0.01277271006349094"
+      "peso": "0.009576685410123917"
     },
     {
       "tipo": "servico",
@@ -1109,7 +1143,7 @@
       "totalMO": "74.70",
       "totalMAT": "274.95",
       "total": "349.65",
-      "peso": "0.0038094563639384537"
+      "peso": "0.00285624311517975"
     },
     {
       "tipo": "servico",
@@ -1126,7 +1160,7 @@
       "totalMO": "731.64",
       "totalMAT": "941.46",
       "total": "1,673.10",
-      "peso": "0.018228518354083876"
+      "peso": "0.01366732548550619"
     },
     {
       "tipo": "servico",
@@ -1143,7 +1177,7 @@
       "totalMO": "343.80",
       "totalMAT": "296.40",
       "total": "640.20",
-      "peso": "0.0069750149126080315"
+      "peso": "0.005229706398793296"
     },
     {
       "tipo": "servico",
@@ -1160,21 +1194,21 @@
       "totalMO": "403.80",
       "totalMAT": "139.80",
       "total": "543.60",
-      "peso": "0.005922552493742152"
+      "peso": "0.004440594186791683"
     },
     {
       "tipo": "secao",
       "item": "8.2",
       "descricao": "HIDRÁULICAS/GÁS/INCÊNDIO",
       "total": "1,848.22",
-      "peso": "0.0201364605776014"
+      "peso": "0.015097856857822157"
     },
     {
       "tipo": "secao",
       "item": "8.2.1",
       "descricao": "TUBULAÇÕES E CONEXÕES HIDRÁULICAS",
       "total": "350.14",
-      "peso": "0.0038147949414254548"
+      "peso": "0.0028602458582841057"
     },
     {
       "tipo": "servico",
@@ -1191,7 +1225,7 @@
       "totalMO": "26.85",
       "totalMAT": "43.45",
       "total": "70.30",
-      "peso": "0.0007659224435431812"
+      "peso": "0.0005742711025229127"
     },
     {
       "tipo": "servico",
@@ -1208,7 +1242,7 @@
       "totalMO": "77.84",
       "totalMAT": "56.00",
       "total": "133.84",
-      "peso": "0.0014581943078779427"
+      "peso": "0.001093320687932669"
     },
     {
       "tipo": "servico",
@@ -1225,7 +1259,7 @@
       "totalMO": "16.58",
       "totalMAT": "12.28",
       "total": "28.86",
-      "peso": "0.0003144313189282533"
+      "peso": "0.00023575339998309046"
     },
     {
       "tipo": "servico",
@@ -1242,7 +1276,7 @@
       "totalMO": "7.72",
       "totalMAT": "6.82",
       "total": "14.54",
-      "peso": "0.00015841411563467786"
+      "peso": "0.00011877527497415576"
     },
     {
       "tipo": "servico",
@@ -1259,14 +1293,14 @@
       "totalMO": "14.22",
       "totalMAT": "88.38",
       "total": "102.60",
-      "peso": "0.0011178327554413996"
+      "peso": "0.0008381253928712779"
     },
     {
       "tipo": "secao",
       "item": "8.2.2",
       "descricao": "REGISTROS",
       "total": "328.28",
-      "peso": "0.003576629015168642"
+      "peso": "0.0026816745026489583"
     },
     {
       "tipo": "servico",
@@ -1283,7 +1317,7 @@
       "totalMO": "9.05",
       "totalMAT": "64.87",
       "total": "73.92",
-      "peso": "0.0008053625466104119"
+      "peso": "0.0006038423883142774"
     },
     {
       "tipo": "servico",
@@ -1300,7 +1334,7 @@
       "totalMO": "16.60",
       "totalMAT": "35.40",
       "total": "52.00",
-      "peso": "0.0005665429169878438"
+      "peso": "0.00042478090087043325"
     },
     {
       "tipo": "servico",
@@ -1317,14 +1351,14 @@
       "totalMO": "24.32",
       "totalMAT": "178.04",
       "total": "202.36",
-      "peso": "0.002204723551570386"
+      "peso": "0.0016530512134642476"
     },
     {
       "tipo": "secao",
       "item": "8.2.3",
       "descricao": "ENTRADA/ALIMENTAÇÃO HIDRÁULICA",
       "total": "534.90",
-      "peso": "0.005827765505707647"
+      "peso": "0.004369525074530668"
     },
     {
       "tipo": "servico",
@@ -1341,7 +1375,7 @@
       "totalMO": "62.56",
       "totalMAT": "109.75",
       "total": "172.31",
-      "peso": "0.0018773271158879878"
+      "peso": "0.0014075768659420067"
     },
     {
       "tipo": "servico",
@@ -1358,7 +1392,7 @@
       "totalMO": "30.19",
       "totalMAT": "159.21",
       "total": "189.40",
-      "peso": "0.002063523624567262"
+      "peso": "0.0015471827427857704"
     },
     {
       "tipo": "servico",
@@ -1375,7 +1409,7 @@
       "totalMO": "4.51",
       "totalMAT": "28.45",
       "total": "32.96",
-      "peso": "0.00035910104892152565"
+      "peso": "0.00026924574024402844"
     },
     {
       "tipo": "servico",
@@ -1392,7 +1426,7 @@
       "totalMO": "43.81",
       "totalMAT": "46.97",
       "total": "90.78",
-      "peso": "0.0009890531923876242"
+      "peso": "0.0007415694265580371"
     },
     {
       "tipo": "servico",
@@ -1409,7 +1443,7 @@
       "totalMO": "2.37",
       "totalMAT": "14.73",
       "total": "17.10",
-      "peso": "0.00018630545924023327"
+      "peso": "0.0001396875654785463"
     },
     {
       "tipo": "servico",
@@ -1426,7 +1460,7 @@
       "totalMO": "11.12",
       "totalMAT": "8.00",
       "total": "19.12",
-      "peso": "0.00020831347255399182"
+      "peso": "0.000156188669704667"
     },
     {
       "tipo": "servico",
@@ -1443,14 +1477,14 @@
       "totalMO": "7.42",
       "totalMAT": "5.81",
       "total": "13.23",
-      "peso": "0.00014414159214902258"
+      "peso": "0.00010807406381761215"
     },
     {
       "tipo": "secao",
       "item": "8.2.4",
       "descricao": "CAIXA D'ÁGUA E BARRILETE",
       "total": "634.90",
-      "peso": "0.006917271115299655"
+      "peso": "0.005186411422358424"
     },
     {
       "tipo": "servico",
@@ -1467,7 +1501,7 @@
       "totalMO": "4.30",
       "totalMAT": "325.86",
       "total": "330.16",
-      "peso": "0.0035971117206289715"
+      "peso": "0.00269703196598812"
     },
     {
       "tipo": "servico",
@@ -1484,7 +1518,7 @@
       "totalMO": "3.50",
       "totalMAT": "1.22",
       "total": "4.72",
-      "peso": "0.00005142466477274275"
+      "peso": "0.0000385570356174701"
     },
     {
       "tipo": "servico",
@@ -1501,7 +1535,7 @@
       "totalMO": "7.92",
       "totalMAT": "2.74",
       "total": "10.66",
-      "peso": "0.00011614129798250798"
+      "peso": "0.00008708008467843882"
     },
     {
       "tipo": "servico",
@@ -1518,7 +1552,7 @@
       "totalMO": "5.47",
       "totalMAT": "15.59",
       "total": "21.06",
-      "peso": "0.00022944988138007676"
+      "peso": "0.00017203626485252547"
     },
     {
       "tipo": "servico",
@@ -1535,7 +1569,7 @@
       "totalMO": "11.24",
       "totalMAT": "44.94",
       "total": "56.18",
-      "peso": "0.0006120842514687897"
+      "peso": "0.0004589267502096335"
     },
     {
       "tipo": "servico",
@@ -1552,7 +1586,7 @@
       "totalMO": "7.80",
       "totalMAT": "28.61",
       "total": "36.41",
-      "peso": "0.0003966889924524499"
+      "peso": "0.00029742831924408605"
     },
     {
       "tipo": "servico",
@@ -1569,7 +1603,7 @@
       "totalMO": "26.52",
       "totalMAT": "26.52",
       "total": "53.04",
-      "peso": "0.0005778737753276007"
+      "peso": "0.0004332765188878419"
     },
     {
       "tipo": "servico",
@@ -1586,7 +1620,7 @@
       "totalMO": "24.42",
       "totalMAT": "36.69",
       "total": "61.11",
-      "peso": "0.0006657968780216757"
+      "peso": "0.0004991992471575418"
     },
     {
       "tipo": "servico",
@@ -1603,21 +1637,21 @@
       "totalMO": "23.22",
       "totalMAT": "38.34",
       "total": "61.56",
-      "peso": "0.0006706996532648398"
+      "peso": "0.0005028752357227668"
     },
     {
       "tipo": "secao",
       "item": "8.3",
       "descricao": "SANITARIAS/PLUVIAL",
       "total": "4,006.61",
-      "peso": "0.04365224070447433"
+      "peso": "0.03272945010070166"
     },
     {
       "tipo": "secao",
       "item": "8.3.1",
       "descricao": "TUBULAÇÕES E CONEXÕES SANITÁRIAS",
       "total": "2,134.46",
-      "peso": "0.02325506143449756"
+      "peso": "0.017436112339844326"
     },
     {
       "tipo": "servico",
@@ -1634,7 +1668,7 @@
       "totalMO": "56.40",
       "totalMAT": "117.90",
       "total": "174.30",
-      "peso": "0.0018990082775188688"
+      "peso": "0.0014238329042637792"
     },
     {
       "tipo": "servico",
@@ -1651,7 +1685,7 @@
       "totalMO": "10.38",
       "totalMAT": "12.52",
       "total": "22.90",
-      "peso": "0.0002494967845965697"
+      "peso": "0.00018706697365255618"
     },
     {
       "tipo": "servico",
@@ -1668,7 +1702,7 @@
       "totalMO": "39.48",
       "totalMAT": "76.79",
       "total": "116.27",
-      "peso": "0.001266768172272627"
+      "peso": "0.0009497937566193322"
     },
     {
       "tipo": "servico",
@@ -1685,7 +1719,7 @@
       "totalMO": "7.88",
       "totalMAT": "22.82",
       "total": "30.70",
-      "peso": "0.00033447822214474626"
+      "peso": "0.00025078410878312117"
     },
     {
       "tipo": "servico",
@@ -1702,7 +1736,7 @@
       "totalMO": "15.06",
       "totalMAT": "38.84",
       "total": "53.90",
-      "peso": "0.000587243523570092"
+      "peso": "0.0004403017414791606"
     },
     {
       "tipo": "servico",
@@ -1719,7 +1753,7 @@
       "totalMO": "9.52",
       "totalMAT": "38.24",
       "total": "47.76",
-      "peso": "0.0005203478791411427"
+      "peso": "0.0003901449197225364"
     },
     {
       "tipo": "servico",
@@ -1736,7 +1770,7 @@
       "totalMO": "1.38",
       "totalMAT": "35.73",
       "total": "37.11",
-      "peso": "0.00040431553171959395"
+      "peso": "0.00030314652367888033"
     },
     {
       "tipo": "servico",
@@ -1753,7 +1787,7 @@
       "totalMO": "72.00",
       "totalMAT": "71.40",
       "total": "143.40",
-      "peso": "0.0015623510441549386"
+      "peso": "0.0011714150227850025"
     },
     {
       "tipo": "servico",
@@ -1770,7 +1804,7 @@
       "totalMO": "18.59",
       "totalMAT": "146.96",
       "total": "165.55",
-      "peso": "0.0018036765366795681"
+      "peso": "0.0013523553488288505"
     },
     {
       "tipo": "servico",
@@ -1787,7 +1821,7 @@
       "totalMO": "127.47",
       "totalMAT": "167.93",
       "total": "295.40",
-      "peso": "0.00321839957073479"
+      "peso": "0.002413082271483192"
     },
     {
       "tipo": "servico",
@@ -1804,7 +1838,7 @@
       "totalMO": "8.90",
       "totalMAT": "24.08",
       "total": "32.98",
-      "peso": "0.00035931895004344405"
+      "peso": "0.000269409117513594"
     },
     {
       "tipo": "servico",
@@ -1821,7 +1855,7 @@
       "totalMO": "9.52",
       "totalMAT": "35.92",
       "total": "45.44",
-      "peso": "0.0004950713489986081"
+      "peso": "0.00037119315645293245"
     },
     {
       "tipo": "servico",
@@ -1838,7 +1872,7 @@
       "totalMO": "33.84",
       "totalMAT": "122.58",
       "total": "156.42",
-      "peso": "0.001704204674523818"
+      "peso": "0.0012777736252721763"
     },
     {
       "tipo": "servico",
@@ -1855,7 +1889,7 @@
       "totalMO": "11.36",
       "totalMAT": "40.85",
       "total": "52.21",
-      "peso": "0.0005688308787679871"
+      "peso": "0.0004264963622008715"
     },
     {
       "tipo": "servico",
@@ -1872,7 +1906,7 @@
       "totalMO": "40.92",
       "totalMAT": "441.76",
       "total": "482.68",
-      "peso": "0.005258825676378701"
+      "peso": "0.003942947023695013"
     },
     {
       "tipo": "servico",
@@ -1889,7 +1923,7 @@
       "totalMO": "42.04",
       "totalMAT": "186.84",
       "total": "228.88",
-      "peso": "0.0024936604392341863"
+      "peso": "0.0018696894729081685"
     },
     {
       "tipo": "servico",
@@ -1906,14 +1940,14 @@
       "totalMO": "14.44",
       "totalMAT": "34.12",
       "total": "48.56",
-      "peso": "0.0005290639240178788"
+      "peso": "0.00039668001050515843"
     },
     {
       "tipo": "secao",
       "item": "8.3.2",
       "descricao": "ACESSÓRIOS/CAIXAS SANITÁRIAS",
       "total": "1,872.15",
-      "peso": "0.020397179269976765"
+      "peso": "0.015293337760857338"
     },
     {
       "tipo": "servico",
@@ -1930,7 +1964,7 @@
       "totalMO": "509.06",
       "totalMAT": "842.20",
       "total": "1,351.26",
-      "peso": "0.01472205350017296"
+      "peso": "0.011038258463657339"
     },
     {
       "tipo": "servico",
@@ -1947,7 +1981,7 @@
       "totalMO": "16.34",
       "totalMAT": "35.28",
       "total": "51.62",
-      "peso": "0.0005624027956713943"
+      "peso": "0.0004216767327486878"
     },
     {
       "tipo": "servico",
@@ -1964,7 +1998,7 @@
       "totalMO": "6.76",
       "totalMAT": "13.36",
       "total": "20.12",
-      "peso": "0.00021920852864991188"
+      "peso": "0.00016435753318294456"
     },
     {
       "tipo": "servico",
@@ -1981,7 +2015,7 @@
       "totalMO": "6.76",
       "totalMAT": "14.29",
       "total": "21.05",
-      "peso": "0.00022934093081911755"
+      "peso": "0.0001719545762177427"
     },
     {
       "tipo": "servico",
@@ -1998,14 +2032,14 @@
       "totalMO": "169.85",
       "totalMAT": "258.25",
       "total": "428.10",
-      "peso": "0.004664173514663384"
+      "peso": "0.0034970904550506244"
     },
     {
       "tipo": "secao",
       "item": "8.4",
       "descricao": "APARELHOS, METAIS E BANCADAS",
       "total": "2,309.16",
-      "peso": "0.025158427734454796"
+      "peso": "0.018863212789499414"
     },
     {
       "tipo": "servico",
@@ -2022,7 +2056,7 @@
       "totalMO": "28.76",
       "totalMAT": "617.60",
       "total": "646.36",
-      "peso": "0.007042128458158899"
+      "peso": "0.005280026597819485"
     },
     {
       "tipo": "servico",
@@ -2039,7 +2073,7 @@
       "totalMO": "24.08",
       "totalMAT": "278.25",
       "total": "302.33",
-      "peso": "0.003293902309479516"
+      "peso": "0.0024696924953876553"
     },
     {
       "tipo": "servico",
@@ -2056,7 +2090,7 @@
       "totalMO": "37.89",
       "totalMAT": "517.04",
       "total": "554.93",
-      "peso": "0.006045993479308926"
+      "peso": "0.004533147410000568"
     },
     {
       "tipo": "servico",
@@ -2073,7 +2107,7 @@
       "totalMO": "38.79",
       "totalMAT": "659.59",
       "total": "698.38",
-      "peso": "0.007608889276268661"
+      "peso": "0.005704970875959484"
     },
     {
       "tipo": "servico",
@@ -2090,14 +2124,14 @@
       "totalMO": "12.15",
       "totalMAT": "95.01",
       "total": "107.16",
-      "peso": "0.001167514211238795"
+      "peso": "0.0008753754103322236"
     },
     {
       "tipo": "secao",
       "item": "9",
       "descricao": "COMPLEMENTAÇÕES",
       "total": "603.75",
-      "peso": "0.006577890117911745"
+      "peso": "0.004931951325010078"
     },
     {
       "tipo": "servico",
@@ -2114,7 +2148,7 @@
       "totalMO": "2.79",
       "totalMAT": "3.13",
       "total": "5.92",
-      "peso": "0.00006449873208784684"
+      "peso": "0.00004835967179140317"
     },
     {
       "tipo": "servico",
@@ -2131,7 +2165,7 @@
       "totalMO": "9.68",
       "totalMAT": "4.30",
       "total": "13.98",
-      "peso": "0.00015231288422096263"
+      "peso": "0.00011420071142632032"
     },
     {
       "tipo": "servico",
@@ -2148,7 +2182,7 @@
       "totalMO": "8.07",
       "totalMAT": "3.54",
       "total": "11.62",
-      "peso": "0.00012660055183459125"
+      "peso": "0.00009492219361758527"
     },
     {
       "tipo": "servico",
@@ -2165,7 +2199,7 @@
       "totalMO": "43.08",
       "totalMAT": "21.54",
       "total": "64.62",
-      "peso": "0.0007040385249183551"
+      "peso": "0.0005278719579662961"
     },
     {
       "tipo": "servico",
@@ -2182,7 +2216,7 @@
       "totalMO": "37.51",
       "totalMAT": "23.87",
       "total": "61.38",
-      "peso": "0.0006687385431675742"
+      "peso": "0.0005014048402966767"
     },
     {
       "tipo": "servico",
@@ -2199,7 +2233,7 @@
       "totalMO": "214.04",
       "totalMAT": "122.92",
       "total": "336.96",
-      "peso": "0.003671198102081228"
+      "peso": "0.0027525802376404075"
     },
     {
       "tipo": "servico",
@@ -2216,7 +2250,7 @@
       "totalMO": "7.66",
       "totalMAT": "4.13",
       "total": "11.79",
-      "peso": "0.00012845271137089766"
+      "peso": "0.00009631090040889246"
     },
     {
       "tipo": "servico",
@@ -2233,7 +2267,7 @@
       "totalMO": "44.34",
       "totalMAT": "34.52",
       "total": "78.86",
-      "peso": "0.000859184123724257"
+      "peso": "0.0006441965738969686"
     },
     {
       "tipo": "servico",
@@ -2250,21 +2284,21 @@
       "totalMO": "10.30",
       "totalMAT": "8.32",
       "total": "18.62",
-      "peso": "0.00020286594450603178"
+      "peso": "0.00015210423796552822"
     },
     {
       "tipo": "rodape_total",
       "label": "Totais ->",
-      "mo": "25.641,66",
-      "mat": "66.143,09",
-      "total": "91.784,75"
+      "mo": "23.181,91",
+      "mat": "99.234,14",
+      "total": "122.416,05"
     },
     {
       "tipo": "rodape_total",
       "label": "Total sem BDI",
       "mo": "",
-      "mat": "91,784.75",
-      "total": "91,784.75"
+      "mat": "122,416.05",
+      "total": "122,416.05"
     },
     {
       "tipo": "rodape_total",
@@ -2277,8 +2311,8 @@
       "tipo": "rodape_total",
       "label": "Total Geral",
       "mo": "",
-      "mat": "91,784.75",
-      "total": "91,784.75"
+      "mat": "122,416.05",
+      "total": "122,416.05"
     }
   ]
 }

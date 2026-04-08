@@ -9,6 +9,8 @@
   "scripts": {
     "dev": "vite",
     "sync:model": "node scripts/sync-41m-model.mjs",
+    "data:sinapi": "node scripts/export-sinapi-orcamento.mjs",
+    "inspect:sinapi": "node scripts/inspect-sinapi-xlsx.mjs",
     "build": "vite build && node scripts/gh-pages-404.mjs",
     "build:gh-pages": "npm run build",
     "preview": "vite preview"
@@ -27,6 +29,7 @@
     "@tailwindcss/vite": "^4.2.2",
     "@vitejs/plugin-react": "^4.3.4",
     "tailwindcss": "^4.2.2",
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "xlsx": "^0.18.5"
   }
 }

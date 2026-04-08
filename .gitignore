@@ -30,3 +30,4 @@ dist-ssr
 /*.xlsx
 *.rvt
 *.dwg
+/*.ifc

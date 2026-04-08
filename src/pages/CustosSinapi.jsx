@@ -57,11 +57,19 @@ export default function CustosSinapi() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">Custos · SINAPI</p>
             <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-              Orçamento sintético
+              {cabecalho.planilhaTitulo || 'Orçamento sintético'}
             </h1>
-            <p className="mt-1 max-w-3xl text-sm text-slate-600">{cabecalho.planilhaTitulo}</p>
+            <p className="mt-1 max-w-3xl text-sm text-slate-600">
+              Orçamento sintético SINAPI · ficheiro: {cabecalho.arquivoOrigem || 'planilha exportada'}
+            </p>
           </div>
         </div>
+
+        {cabecalho.notaFonteNumerica ? (
+          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50/90 px-4 py-3 text-sm leading-relaxed text-amber-950 shadow-sm">
+            {cabecalho.notaFonteNumerica}
+          </div>
+        ) : null}
 
         {/* Cabeçalho da obra */}
         <div className="mb-6 rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm sm:p-6">
@@ -121,7 +129,7 @@ export default function CustosSinapi() {
               onClick={() => setVista('planilha')}
               className={[subTabSinapiClass(vista === 'planilha'), 'shrink-0 snap-start'].join(' ')}
             >
-              Planilha completa
+              Extração (41 m²)
             </button>
             <button
               type="button"
